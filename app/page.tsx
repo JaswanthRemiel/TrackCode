@@ -30,7 +30,7 @@ export default function Home() {
                 <span className="text-muted-foreground italic">Track every detail.</span>
               </h1>
               <p className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto font-medium px-4">
-                LeetTrack provides a focused, minimal environment to track your LeetCode journey across top tech companies. Monitor your streaks and build your profile.
+                TrackCode provides a focused, minimal environment to track your LeetCode journey across top tech companies. Monitor your streaks and build your profile.
               </p>
             </div>
 
@@ -87,7 +87,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="space-y-4 max-w-xl">
               <h2 className="text-4xl md:text-6xl font-serif leading-none">Designed for <br /><span className="italic text-muted-foreground">High Performers.</span></h2>
-              <p className="text-lg text-slate-500">Forget spreadsheets. LeetTrack is the elite workspace for your technical interview preparation.</p>
+              <p className="text-lg text-slate-500">Forget spreadsheets. TrackCode is the elite workspace for your technical interview preparation.</p>
             </div>
             <Button variant="outline" className="h-12 border-black/10">Browse Features</Button>
           </div>
@@ -127,12 +127,9 @@ export default function Home() {
 
       <footer className="container mx-auto px-6 py-8 md:py-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center space-x-2 font-serif text-lg">
-          <div className="bg-primary text-primary-foreground p-1 rounded-lg">
-            <Activity className="h-4 w-4" />
-          </div>
-          <span className="font-bold tracking-tighter text-slate-900">LeetTrack</span>
+          <span className="font-bold tracking-tighter text-slate-900">TrackCode</span>
         </div>
-        <p className="text-xs md:text-sm text-slate-500 font-medium text-center md:text-left">© 2024 LeetTrack Intelligence. All rights reserved.</p>
+        <p className="text-xs md:text-sm text-slate-500 font-medium text-center md:text-left">© 2024 TrackCode Intelligence. All rights reserved.</p>
         <div className="flex gap-6 md:gap-8 text-xs md:text-sm font-bold text-slate-400">
           <Link href="#">Terms</Link>
           <Link href="#">Privacy</Link>

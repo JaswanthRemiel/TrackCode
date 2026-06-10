@@ -37,8 +37,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 flex flex-col items-center">
           <Link href="/" className="flex items-center space-x-2 mb-4">
-            <Activity className="h-6 w-6 stroke-[1.5]" />
-            <span className="font-bold text-xl">LeetTrack</span>
+            <span className="font-bold text-xl">TrackCode</span>
           </Link>
           <CardTitle className="text-2xl font-bold">Login</CardTitle>
           <CardDescription>

@@ -34,8 +34,8 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchProblems = async () => {
       try {
-        const CACHE_KEY = 'leettrack_problems_cache';
-        const CACHE_TIME_KEY = 'leettrack_problems_cache_time';
+        const CACHE_KEY = 'trackcode_problems_cache';
+        const CACHE_TIME_KEY = 'trackcode_problems_cache_time';
         const EXPIRE_TIME = 24 * 60 * 60 * 1000;
 
         const cached = typeof window !== 'undefined' ? localStorage.getItem(CACHE_KEY) : null;
