@@ -11,18 +11,18 @@ import { DailyActivity } from '@/types';
 export default function DashboardPage() {
   const { userData } = useAuth();
   const { activity, loading } = useData();
-
   const activityData = useMemo(() => {
     const data: any[] = activity.map(act => {
+      const solved = Math.max(0, act.problemsSolved);
       let level = 0;
-      if (act.problemsSolved > 1) level = 1;
-      if (act.problemsSolved > 3) level = 2;
-      if (act.problemsSolved > 5) level = 3;
-      if (act.problemsSolved > 8) level = 4;
+      if (solved > 1) level = 1;
+      if (solved > 3) level = 2;
+      if (solved > 5) level = 3;
+      if (solved > 8) level = 4;
       
       return {
         date: act.date,
-        count: act.problemsSolved,
+        count: solved,
         level
       };
     });
