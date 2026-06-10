@@ -7,7 +7,7 @@ import { useData } from '@/components/data/DataProvider';
 import { useMemo } from 'react';
 import { Problem, UserProgress, DailyActivity } from '@/types';
 
-const COLORS = ['#111111', '#FF4D00', '#666666'];
+const COLORS = ['#FF6B35', '#0A0A0A', '#E8E8E8'];
 
 export default function AnalyticsPage() {
   const { userData } = useAuth();
@@ -58,29 +58,29 @@ export default function AnalyticsPage() {
   const hasData = difficultyData.some(d => d.value > 0) || weeklyData.some(d => d.solved > 0);
 
   return (
-    <div className="space-y-6 md:space-y-12 pb-20 px-4 md:px-0">
-      <div className="space-y-4">
-        <h1 className="text-4xl md:text-6xl font-serif">Intelligence.</h1>
-        <p className="text-slate-500 font-medium italic">Your progress, visualized.</p>
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="space-y-2">
+        <h1 className="text-3xl sm:text-4xl font-bold">Intelligence</h1>
+        <p className="text-muted-foreground text-sm">Your progress, visualized</p>
       </div>
 
       {loading ? (
-        <div className="grid gap-6 md:grid-cols-2">
-           <Card className="h-[300px] md:h-[450px] border-black/5 shadow-xl shadow-black/[0.02] animate-pulse bg-slate-50/50" />
-           <Card className="h-[300px] md:h-[450px] border-black/5 shadow-xl shadow-black/[0.02] animate-pulse bg-slate-50/50" />
+        <div className="grid gap-6 lg:grid-cols-2">
+           <div className="card-elevated h-80 animate-pulse bg-muted" />
+           <div className="card-elevated h-80 animate-pulse bg-muted" />
         </div>
       ) : !hasData ? (
-        <div className="py-20 text-center space-y-4 border border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
-           <h2 className="text-3xl font-serif text-slate-400 italic font-medium">Static Silence.</h2>
-           <p className="text-slate-500 max-w-sm mx-auto">Solved problems will appear here once you begin your preparation journey.</p>
+        <div className="py-16 text-center space-y-4 rounded-2xl border-2 border-dashed border-border bg-secondary/50">
+           <h2 className="text-2xl font-bold text-muted-foreground">No data yet</h2>
+           <p className="text-muted-foreground text-sm max-w-sm mx-auto">Solved problems will appear here once you begin your preparation journey</p>
         </div>
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-black/5 shadow-xl shadow-black/[0.02] overflow-hidden">
-            <CardHeader className="p-6 md:p-8 border-b border-black/5">
-              <CardTitle className="text-xl md:text-2xl font-serif">Difficulty Spread</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[350px] pt-8 p-4 md:p-8">
+          <div className="card-elevated overflow-hidden">
+            <div className="p-6 border-b border-border">
+              <h2 className="text-xl font-bold">Difficulty Spread</h2>
+            </div>
+            <div className="h-80 pt-6 p-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -89,7 +89,7 @@ export default function AnalyticsPage() {
                     cy="50%"
                     innerRadius={60}
                     outerRadius={100}
-                    paddingAngle={5}
+                    paddingAngle={4}
                     dataKey="value"
                     stroke="none"
                   >
@@ -99,39 +99,41 @@ export default function AnalyticsPage() {
                   </Pie>
                   <Tooltip 
                     contentStyle={{ 
-                      borderRadius: '1rem', 
+                      borderRadius: '0.75rem', 
                       border: 'none', 
                       boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-                      fontFamily: 'Instrument Serif'
+                      backgroundColor: '#FFFFFF',
+                      fontFamily: 'monospace'
                     }} 
                   />
                 </PieChart>
               </ResponsiveContainer>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card className="border-black/5 shadow-xl shadow-black/[0.02] overflow-hidden">
-            <CardHeader className="p-6 md:p-8 border-b border-black/5">
-              <CardTitle className="text-xl md:text-2xl font-serif">Weekly Velocity</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[350px] pt-8 p-4 md:p-8">
+          <div className="card-elevated overflow-hidden">
+            <div className="p-6 border-b border-border">
+              <h2 className="text-xl font-bold">Weekly Velocity</h2>
+            </div>
+            <div className="h-80 pt-6 p-6">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyData}>
-                  <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
+                  <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#686868' }} />
                   <Tooltip 
-                    cursor={{ fill: '#F9F9F9' }}
+                    cursor={{ fill: 'rgba(255, 107, 53, 0.05)' }}
                     contentStyle={{ 
-                      borderRadius: '1rem', 
+                      borderRadius: '0.75rem', 
                       border: 'none', 
                       boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-                      fontFamily: 'Instrument Serif'
+                      backgroundColor: '#FFFFFF',
+                      fontFamily: 'monospace'
                     }} 
                   />
-                  <Bar dataKey="solved" fill="#111111" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="solved" fill="#FF6B35" radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       )}
     </div>

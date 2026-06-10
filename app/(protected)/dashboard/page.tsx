@@ -5,7 +5,7 @@ import { useData } from '@/components/data/DataProvider';
 import { ContributionGraph } from '@/components/contribution-graph';
 import { StreakWidget } from '@/components/streak-widget';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { DailyActivity } from '@/types';
 
 export default function DashboardPage() {
@@ -33,43 +33,64 @@ export default function DashboardPage() {
   if (!userData) return null;
 
   return (
-    <div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-2">
-          <h1 className="text-4xl md:text-6xl font-serif">Your Performance.</h1>
-          <p className="text-slate-500 font-medium italic">Welcome back, {userData.email}</p>
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Header Section */}
+      <div className="flex flex-col gap-4 pt-2">
+        <div className="space-y-1">
+          <h1 className="text-3xl sm:text-4xl font-bold text-balance">Your Performance</h1>
+          <p className="text-muted-foreground font-medium">Welcome back, {userData.email?.split('@')[0]}</p>
         </div>
-        <StreakWidget currentStreak={userData.currentStreak} longestStreak={userData.longestStreak} />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="p-8 border-black/5 shadow-xl shadow-black/[0.02]">
-          <div className="space-y-4">
-            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Total Solved</p>
-            <div className="flex items-baseline gap-2">
-               <span className="text-6xl font-serif">{userData.totalSolved}</span>
-               <span className="text-slate-400 font-medium">Problems</span>
-            </div>
+      {/* Key Metrics */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Total Solved Card */}
+        <div className="card-elevated p-6 space-y-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Total Solved</p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-bold text-accent">{userData.totalSolved}</span>
+            <span className="text-sm text-muted-foreground">problems</span>
           </div>
-        </Card>
+        </div>
+
+        {/* Current Streak Card */}
+        <div className="card-elevated p-6 space-y-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Current Streak</p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-bold text-accent">{userData.currentStreak}</span>
+            <span className="text-sm text-muted-foreground">days</span>
+          </div>
+        </div>
+
+        {/* Longest Streak Card */}
+        <div className="card-elevated p-6 space-y-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Longest Streak</p>
+          <div className="flex items-baseline gap-2">
+            <span className="text-5xl font-bold text-accent">{userData.longestStreak}</span>
+            <span className="text-sm text-muted-foreground">days</span>
+          </div>
+        </div>
       </div>
 
-      <Card className="border-black/5 shadow-xl shadow-black/[0.02] overflow-hidden">
-        <CardHeader className="p-6 md:p-8 border-b border-black/5">
-          <CardTitle className="text-xl md:text-2xl font-serif">Activity Roadmap</CardTitle>
-        </CardHeader>
-        <CardContent className="p-6 md:p-8">
+      {/* Activity Roadmap */}
+      <div className="card-elevated overflow-hidden">
+        <div className="p-6 border-b border-border">
+          <h2 className="text-xl font-bold">Activity Roadmap</h2>
+        </div>
+        <div className="p-6">
           {loading ? (
-            <div className="h-[150px] flex items-center justify-center text-slate-400 italic">Preparing your data...</div>
+            <div className="h-40 flex items-center justify-center text-muted-foreground">
+              <span className="text-sm font-medium">Preparing your data...</span>
+            </div>
           ) : (
-            <div className="overflow-x-auto pb-4 scrollbar-hide">
-               <div className="min-w-[800px] md:min-w-0">
-                  <ContributionGraph data={activityData} />
-               </div>
+            <div className="overflow-x-auto -mx-6 px-6">
+              <div className="min-w-[800px] md:min-w-0 pb-2">
+                <ContributionGraph data={activityData} />
+              </div>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

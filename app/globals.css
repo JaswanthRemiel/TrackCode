@@ -11,38 +11,38 @@
   --font-serif: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-heading: var(--font-geist-mono);
   
-  --color-primary: #111111;
+  --color-primary: #0A0A0A;
   --color-primary-foreground: #FFFFFF;
   
-  --color-accent: #FF4D00;
+  --color-accent: #FF6B35;
   --color-accent-foreground: #FFFFFF;
 
   --radius-3xl: 1.5rem;
   --radius-4xl: 2rem;
   --radius-full: 9999px;
 
-  --color-border: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --color-border: color-mix(in srgb, var(--foreground) 8%, transparent);
 }
 
 :root {
-  --background: #F9F9F9;
-  --foreground: #111111;
+  --background: #FAFAFA;
+  --foreground: #0A0A0A;
   --card: #FFFFFF;
-  --card-foreground: #111111;
+  --card-foreground: #0A0A0A;
   --popover: #FFFFFF;
-  --popover-foreground: #111111;
-  --primary: #111111;
+  --popover-foreground: #0A0A0A;
+  --primary: #0A0A0A;
   --primary-foreground: #FFFFFF;
-  --secondary: #EEEEEE;
-  --secondary-foreground: #111111;
-  --muted: #F3F3F3;
-  --muted-foreground: #666666;
-  --accent: #FF4D00;
+  --secondary: #F0F0F0;
+  --secondary-foreground: #0A0A0A;
+  --muted: #E8E8E8;
+  --muted-foreground: #686868;
+  --accent: #FF6B35;
   --accent-foreground: #FFFFFF;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: #E5E5E5;
-  --input: #E5E5E5;
-  --ring: #111111;
+  --destructive: #EF4444;
+  --border: #EFEFEF;
+  --input: #EFEFEF;
+  --ring: #0A0A0A;
   --radius: 0.75rem;
 }
 
@@ -50,22 +50,93 @@
   * {
     @apply border-border outline-primary/20;
   }
+  
   body {
-    @apply bg-background text-foreground font-sans min-h-screen relative;
-    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 24px 24px;
+    @apply bg-background text-foreground font-sans min-h-screen relative pb-20;
+    background-image: radial-gradient(#e5e7eb 0.5px, transparent 0.5px);
+    background-size: 32px 32px;
     background-attachment: fixed;
   }
+  
   h1, h2, h3, h4, .font-serif {
-    @apply font-serif tracking-tight;
+    @apply font-serif font-bold tracking-tight text-foreground;
+  }
+  
+  h1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl sm:text-3xl;
+  }
+  
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+  
+  h4 {
+    @apply text-lg;
+  }
+}
+
+@layer components {
+  .card-elevated {
+    @apply rounded-2xl border shadow-sm hover:shadow-md transition-shadow duration-300;
+    background-color: white;
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+  
+  .card-interactive {
+    @apply rounded-2xl border shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer hover:-translate-y-0.5 transition-all duration-300;
+    background-color: white;
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+  
+  .card-interactive:hover {
+    border-color: rgba(255, 107, 53, 0.3);
+  }
+  
+  .button-primary {
+    @apply px-6 py-2.5 rounded-xl font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-200;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  
+  .button-secondary {
+    @apply px-6 py-2.5 rounded-xl font-semibold text-sm hover:opacity-80 active:scale-95 transition-all duration-200 border;
+    background-color: #F0F0F0;
+    color: #0A0A0A;
+    border-color: var(--border);
+  }
+  
+  .badge-accent {
+    @apply inline-flex items-center px-3 py-1 rounded-full font-semibold text-xs;
+    background-color: rgba(255, 107, 53, 0.1);
+    color: #FF6B35;
   }
 }
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
+    @apply bg-white/50 backdrop-blur-xl border border-white/20 shadow-sm;
   }
+  
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20;
+  }
+  
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent/60;
+  }
+  
+  .safe-area {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
 }

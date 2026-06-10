@@ -58,53 +58,63 @@ export default function CompaniesPage() {
   const filtered = companies.filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div className="space-y-6 md:space-y-10 pb-20 px-4 md:px-0">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div className="space-y-4">
-          <h1 className="text-4xl md:text-6xl font-serif">Companies.</h1>
-          <p className="text-slate-500 font-medium italic">Targeted lists from 470+ organizations.</p>
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Header Section */}
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl sm:text-4xl font-bold text-balance">Companies</h1>
+          <p className="text-muted-foreground text-sm">Targeted lists from 470+ organizations</p>
         </div>
-        <div className="w-full md:max-w-sm">
+        <div className="w-full sm:max-w-xs">
           <Input 
             placeholder="Search companies..." 
-            className="h-11 md:h-12 rounded-xl"
+            className="h-11 rounded-xl bg-secondary border-border focus:ring-2 focus:ring-accent focus:ring-offset-2"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {/* Companies Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {loading ? (
           Array.from({ length: 6 }).map((_, i) => (
-            <Card key={i} className="animate-pulse h-40 border-black/5 bg-slate-50/50" />
+            <div key={i} className="card-elevated h-40 animate-pulse bg-muted" />
           ))
         ) : filtered.length === 0 ? (
-          <div className="col-span-full py-20 text-center text-slate-400 italic font-serif text-2xl">No companies in sight.</div>
+          <div className="col-span-full py-16 text-center">
+            <p className="text-muted-foreground text-sm">No companies found</p>
+          </div>
         ) : (
-          filtered.map((company) => (
-            <Link key={company.name} href={`/companies/${encodeURIComponent(company.name)}`}>
-              <Card className="hover:border-accent transition-all duration-500 cursor-pointer h-full group bg-white border-black/5 shadow-xl shadow-black/[0.02] hover:-translate-y-1">
-                <CardHeader className="p-8 pb-4">
-                  <CardTitle className="text-2xl font-serif transition-colors group-hover:text-accent capitalize">{company.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="p-8 pt-0">
-                  <div className="space-y-4">
-                    <div className="flex justify-between text-[11px] font-bold uppercase tracking-widest text-slate-400">
-                      <span>Efficiency</span>
-                      <span className="text-primary">{company.solved} / {company.total}</span>
+          filtered.map((company) => {
+            const percentage = Math.min(100, Math.max(0, (company.solved / company.total) * 100));
+            
+            return (
+              <Link key={company.name} href={`/companies/${encodeURIComponent(company.name)}`}>
+                <div className="card-interactive group p-6 space-y-4 h-full flex flex-col">
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold capitalize group-hover:text-accent transition-colors duration-300">
+                      {company.name}
+                    </h3>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Progress</span>
+                      <span className="badge-accent">{company.solved} / {company.total}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                    
+                    <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-primary group-hover:bg-accent transition-colors duration-500" 
-                        style={{ width: `${Math.min(100, Math.max(0, (company.solved / company.total) * 100))}%` }} 
+                        className="h-full bg-accent transition-all duration-500 rounded-full" 
+                        style={{ width: `${percentage}%` }}
                       />
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))
+                </div>
+              </Link>
+            );
+          })
         )}
       </div>
     </div>
