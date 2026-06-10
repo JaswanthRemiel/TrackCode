@@ -9,7 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
-import { Activity } from 'lucide-react';
+import { Dock } from '@/components/dock';
+import { ArrowRight } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -33,55 +34,70 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 flex flex-col items-center">
-          <Link href="/" className="flex items-center space-x-2 mb-4">
-            <span className="font-bold text-xl">TrackCode</span>
-          </Link>
-          <CardTitle className="text-2xl font-bold">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-            {error && <div className="p-3 text-sm text-red-500 bg-red-100 rounded-md">{error}</div>}
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <Button className="w-full text-white rounded-lg" type="submit" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col items-center justify-center">
-          <div className="text-sm text-slate-500 mt-2">
-            Don't have an account?{' '}
-            <Link href="/signup" className="text-slate-900 dark:text-slate-50 underline font-medium">
-              Sign up
+    <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
+      <Dock />
+      
+      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-6 duration-700">
+        <Card className="border-black/5 dark:border-white/5 shadow-2xl shadow-black/[0.05] dark:shadow-black/30 bg-white/80 dark:bg-card/80 backdrop-blur-sm overflow-hidden transition-colors duration-300">
+          <CardHeader className="space-y-3 flex flex-col items-center pt-10 pb-2">
+            <Link href="/" className="flex items-center space-x-2 mb-4 group">
+              <span className="font-bold text-2xl font-serif group-hover:text-accent transition-colors">TrackCode</span>
             </Link>
-          </div>
-        </CardFooter>
-      </Card>
+            <CardTitle className="text-2xl font-serif">Welcome back</CardTitle>
+            <CardDescription className="text-center">
+              Enter your credentials to access your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="px-8 pb-2">
+            <form onSubmit={handleLogin} className="space-y-4">
+              {error && (
+                <div className="p-3 text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-xl font-medium">
+                  {error}
+                </div>
+              )}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-12 rounded-xl bg-slate-50/50 dark:bg-white/5 border-black/5 dark:border-white/5"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-12 rounded-xl bg-slate-50/50 dark:bg-white/5 border-black/5 dark:border-white/5"
+                />
+              </div>
+              <Button className="w-full h-12 rounded-xl text-white font-bold shadow-xl shadow-primary/10" type="submit" disabled={loading}>
+                {loading ? 'Signing in...' : (
+                  <>
+                    Sign In
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </CardContent>
+          <CardFooter className="flex flex-col items-center justify-center pb-8 pt-4">
+            <div className="text-sm text-slate-500 dark:text-slate-400">
+              Don&apos;t have an account?{' '}
+              <Link href="/signup" className="text-primary underline font-bold hover:text-accent transition-colors">
+                Sign up
+              </Link>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 }

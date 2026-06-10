@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/components/auth/AuthProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -22,11 +23,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#F9F9F9] text-[#111111] selection:bg-[#FF4D00] selection:text-white">
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-[#FF4D00] selection:text-white transition-colors duration-300">
+        <ThemeProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

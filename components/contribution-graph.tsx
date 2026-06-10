@@ -2,6 +2,7 @@
 
 import { ActivityCalendar, ThemeInput } from 'react-activity-calendar';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 interface DailyActivityData {
   date: string;
@@ -15,21 +16,23 @@ interface ContributionGraphProps {
 
 export function ContributionGraph({ data }: ContributionGraphProps) {
   const { theme } = useTheme();
-  
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const customTheme: ThemeInput = {
-    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+    light: ['#f0f0f0', '#ffcdb2', '#ff9b6a', '#ff6b2b', '#FF4D00'],
+    dark: ['#1a1a1a', '#4a2000', '#7a3500', '#b05000', '#FF4D00'],
   };
 
-  const isDark = theme === 'dark' || (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const colorScheme = mounted && theme === 'dark' ? 'dark' : 'light';
 
   return (
-    <div className="w-full flex justify-center p-4 border rounded-lg bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+    <div className="w-full flex justify-center">
       <ActivityCalendar
         data={data}
         theme={customTheme}
-        colorScheme={isDark ? 'dark' : 'light'}
+        colorScheme={colorScheme}
         labels={{
           legend: {
             less: 'Less',

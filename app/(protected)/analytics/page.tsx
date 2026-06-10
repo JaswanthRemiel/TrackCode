@@ -1,17 +1,22 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis } from 'recharts';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { useData } from '@/components/data/DataProvider';
 import { useMemo } from 'react';
-import { Problem, UserProgress, DailyActivity } from '@/types';
+import { BarChart3, PieChart as PieChartIcon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
-const COLORS = ['#111111', '#FF4D00', '#666666'];
+const LIGHT_COLORS = ['#111111', '#FF4D00', '#666666'];
+const DARK_COLORS = ['#e5e5e5', '#FF4D00', '#888888'];
 
 export default function AnalyticsPage() {
   const { userData } = useAuth();
   const { problems, userProgress, activity, loading } = useData();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const colors = isDark ? DARK_COLORS : LIGHT_COLORS;
 
   const difficultyData = useMemo(() => {
     const problemMap: Record<string, string> = {};
@@ -58,27 +63,38 @@ export default function AnalyticsPage() {
   const hasData = difficultyData.some(d => d.value > 0) || weeklyData.some(d => d.solved > 0);
 
   return (
-    <div className="space-y-6 md:space-y-12 pb-20 px-4 md:px-0">
-      <div className="space-y-4">
+    <div className="space-y-6 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Header */}
+      <div className="space-y-2">
         <h1 className="text-4xl md:text-6xl font-serif">Intelligence.</h1>
-        <p className="text-slate-500 font-medium italic">Your progress, visualized.</p>
+        <p className="text-slate-500 dark:text-slate-400 font-medium italic">Your progress, visualized.</p>
       </div>
 
       {loading ? (
         <div className="grid gap-6 md:grid-cols-2">
-           <Card className="h-[300px] md:h-[450px] border-black/5 shadow-xl shadow-black/[0.02] animate-pulse bg-slate-50/50" />
-           <Card className="h-[300px] md:h-[450px] border-black/5 shadow-xl shadow-black/[0.02] animate-pulse bg-slate-50/50" />
+           <Card className="h-[300px] md:h-[450px] border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 animate-pulse bg-slate-50/50 dark:bg-white/[0.02]" />
+           <Card className="h-[300px] md:h-[450px] border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 animate-pulse bg-slate-50/50 dark:bg-white/[0.02]" />
         </div>
       ) : !hasData ? (
-        <div className="py-20 text-center space-y-4 border border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
-           <h2 className="text-3xl font-serif text-slate-400 italic font-medium">Static Silence.</h2>
-           <p className="text-slate-500 max-w-sm mx-auto">Solved problems will appear here once you begin your preparation journey.</p>
+        <div className="py-24 text-center space-y-6 border border-dashed border-slate-200 dark:border-white/10 rounded-3xl bg-white/50 dark:bg-white/[0.02]">
+          <div className="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/5 flex items-center justify-center mx-auto">
+            <BarChart3 className="w-8 h-8 text-slate-300 dark:text-slate-600" />
+          </div>
+          <div className="space-y-2">
+            <h2 className="text-3xl font-serif text-slate-400 dark:text-slate-500 italic font-medium">Static Silence.</h2>
+            <p className="text-slate-500 dark:text-slate-400 max-w-sm mx-auto">Solved problems will appear here once you begin your preparation journey.</p>
+          </div>
         </div>
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-black/5 shadow-xl shadow-black/[0.02] overflow-hidden">
-            <CardHeader className="p-6 md:p-8 border-b border-black/5">
-              <CardTitle className="text-xl md:text-2xl font-serif">Difficulty Spread</CardTitle>
+          <Card className="border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 overflow-hidden card-glow transition-colors duration-300">
+            <CardHeader className="p-6 md:p-8 border-b border-black/5 dark:border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <PieChartIcon className="w-4 h-4 text-accent" />
+                </div>
+                <CardTitle className="text-xl md:text-2xl font-serif">Difficulty Spread</CardTitle>
+              </div>
             </CardHeader>
             <CardContent className="h-[350px] pt-8 p-4 md:p-8">
               <ResponsiveContainer width="100%" height="100%">
@@ -94,15 +110,19 @@ export default function AnalyticsPage() {
                     stroke="none"
                   >
                     {difficultyData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                     ))}
                   </Pie>
                   <Tooltip 
                     contentStyle={{ 
                       borderRadius: '1rem', 
                       border: 'none', 
-                      boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-                      fontFamily: 'Instrument Serif'
+                      boxShadow: '0 20px 40px -12px rgb(0 0 0 / 0.15)',
+                      fontFamily: 'monospace',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      backgroundColor: isDark ? '#1a1a1a' : '#ffffff',
+                      color: isDark ? '#e5e5e5' : '#111111',
                     }} 
                   />
                 </PieChart>
@@ -110,24 +130,33 @@ export default function AnalyticsPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-black/5 shadow-xl shadow-black/[0.02] overflow-hidden">
-            <CardHeader className="p-6 md:p-8 border-b border-black/5">
-              <CardTitle className="text-xl md:text-2xl font-serif">Weekly Velocity</CardTitle>
+          <Card className="border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 overflow-hidden card-glow transition-colors duration-300">
+            <CardHeader className="p-6 md:p-8 border-b border-black/5 dark:border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-primary/5 dark:bg-primary/10 flex items-center justify-center">
+                  <BarChart3 className="w-4 h-4 text-primary" />
+                </div>
+                <CardTitle className="text-xl md:text-2xl font-serif">Weekly Velocity</CardTitle>
+              </div>
             </CardHeader>
             <CardContent className="h-[350px] pt-8 p-4 md:p-8">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyData}>
-                  <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
+                  <XAxis dataKey="day" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: isDark ? '#666' : '#94a3b8', fontWeight: 700 }} />
                   <Tooltip 
-                    cursor={{ fill: '#F9F9F9' }}
+                    cursor={{ fill: isDark ? '#1a1a1a' : '#F9F9F9', radius: 8 }}
                     contentStyle={{ 
                       borderRadius: '1rem', 
                       border: 'none', 
-                      boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-                      fontFamily: 'Instrument Serif'
+                      boxShadow: '0 20px 40px -12px rgb(0 0 0 / 0.15)',
+                      fontFamily: 'monospace',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      backgroundColor: isDark ? '#1a1a1a' : '#ffffff',
+                      color: isDark ? '#e5e5e5' : '#111111',
                     }} 
                   />
-                  <Bar dataKey="solved" fill="#111111" radius={[8, 8, 0, 0]} />
+                  <Bar dataKey="solved" fill={isDark ? '#e5e5e5' : '#111111'} radius={[8, 8, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
