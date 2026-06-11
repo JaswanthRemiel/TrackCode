@@ -7,9 +7,7 @@ import { auth } from '@/lib/firebase';
 import { sendEmailVerification, signOut } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dock } from '@/components/dock';
 import { Mail, RefreshCw, Send, LogOut, AlertCircle, CheckCircle2 } from 'lucide-react';
-import Link from 'next/link';
 
 export default function VerifyEmailPage() {
   const { user, loading } = useAuth();
@@ -81,59 +79,57 @@ export default function VerifyEmailPage() {
 
   if (loading || !user || user.emailVerified) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <RefreshCw className="w-8 h-8 text-primary animate-spin" />
-          <p className="text-sm text-slate-500 font-medium italic">Loading authentication...</p>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-3">
+          <RefreshCw className="w-6 h-6 text-zinc-900 dark:text-zinc-50 animate-spin" />
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium italic">Loading authentication...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
-      <Dock />
-
-      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-6 duration-700">
-        <Card className="border-black/5 dark:border-white/5 shadow-2xl shadow-black/[0.05] dark:shadow-black/30 bg-white/80 dark:bg-card/80 backdrop-blur-sm overflow-hidden transition-colors duration-300">
-          <CardHeader className="space-y-3 flex flex-col items-center pt-10 pb-2 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-primary/5 dark:bg-primary/10 flex items-center justify-center text-primary mb-2 shadow-inner">
-              <Mail className="w-8 h-8" />
+    <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-background text-foreground transition-colors duration-300">
+      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <Card className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-xl shadow-none overflow-hidden">
+          <CardHeader className="space-y-2 flex flex-col items-center pt-8 pb-2 text-center">
+            <div className="w-12 h-12 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 mb-2">
+              <Mail className="w-6 h-6" />
             </div>
-            <CardTitle className="text-3xl font-serif">Verify your email</CardTitle>
-            <CardDescription className="px-4 text-slate-500 dark:text-slate-400">
-              We sent a verification link to <span className="font-bold text-slate-900 dark:text-white">{user.email}</span>. Click the link to secure your account.
+            <CardTitle className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Verify your email</CardTitle>
+            <CardDescription className="px-4 text-xs text-zinc-500 dark:text-zinc-400">
+              We sent a verification link to <span className="font-semibold text-zinc-900 dark:text-zinc-50">{user.email}</span>. Click the link to secure your account.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="px-8 py-6 space-y-4">
+          <CardContent className="px-6 py-4 space-y-3">
             {error && (
-              <div className="p-4 text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl font-medium flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+              <div className="p-3 text-xs text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{error}</span>
               </div>
             )}
 
             {message && (
-              <div className="p-4 text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl font-medium flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
+              <div className="p-3 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{message}</span>
               </div>
             )}
 
             <Button
-              className="w-full h-12 rounded-xl text-white font-bold shadow-xl shadow-primary/10 flex items-center justify-center gap-2"
+              className="w-full h-10 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-50 dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 shadow-none font-semibold text-sm flex items-center justify-center gap-1.5"
               onClick={handleCheckStatus}
               disabled={isChecking}
             >
               {isChecking ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                   Checking status...
                 </>
               ) : (
                 <>
-                  <RefreshCw className="w-4 h-4" />
+                  <RefreshCw className="w-3.5 h-3.5" />
                   Verify Status & Proceed
                 </>
               )}
@@ -141,21 +137,21 @@ export default function VerifyEmailPage() {
 
             <Button
               variant="outline"
-              className="w-full h-12 rounded-xl font-bold border-black/5 dark:border-white/5 bg-slate-50/50 dark:bg-white/5 flex items-center justify-center gap-2"
+              className="w-full h-10 rounded-lg font-semibold border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-center gap-1.5"
               onClick={handleResendEmail}
               disabled={cooldown > 0}
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-3.5 h-3.5" />
               {cooldown > 0 ? `Resend email in ${cooldown}s` : 'Resend Verification Email'}
             </Button>
           </CardContent>
 
-          <CardFooter className="flex justify-center pb-8 pt-2">
+          <CardFooter className="flex justify-center pb-6 pt-2">
             <button
               onClick={handleSignOut}
-              className="text-sm font-bold text-slate-400 hover:text-rose-500 transition-colors flex items-center gap-1.5"
+              className="text-xs font-semibold text-zinc-400 hover:text-rose-500 transition-colors flex items-center gap-1.5"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-3.5 h-3.5" />
               Sign out / Change account
             </button>
           </CardFooter>

@@ -61,81 +61,81 @@ export default function ProfilePage() {
   });
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 py-6 md:py-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="max-w-3xl mx-auto space-y-8 py-6 md:py-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Profile Hero */}
       <div className="flex flex-col items-center text-center space-y-4">
-        <div className="w-20 h-20 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-3xl font-black uppercase shadow-2xl shadow-primary/20">
+        <div className="w-16 h-16 rounded-xl bg-zinc-950 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-50 dark:text-zinc-100 flex items-center justify-center text-2xl font-bold uppercase shadow-none">
           {userData.email ? userData.email[0] : 'U'}
         </div>
         <div className="space-y-1">
-          <h1 className="text-3xl md:text-4xl font-serif">{userData.email}</h1>
-          <p className="text-slate-400 dark:text-slate-500 text-sm font-medium">Member since {memberSince}</p>
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">{userData.email}</h1>
+          <p className="text-zinc-400 dark:text-zinc-500 text-xs font-medium">Member since {memberSince}</p>
         </div>
       </div>
 
       {/* Stats Row */}
       <div className="grid grid-cols-3 gap-3 md:gap-4">
-        <Card className="p-4 md:p-6 border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 text-center card-glow transition-colors duration-300">
+        <Card className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none text-center rounded-xl transition-colors duration-300">
           <div className="space-y-2">
-            <div className="w-9 h-9 rounded-xl bg-primary/5 dark:bg-primary/10 flex items-center justify-center mx-auto">
-              <CheckCircle className="w-4 h-4 text-primary" />
+            <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center mx-auto text-zinc-900 dark:text-zinc-50">
+              <CheckCircle className="w-4 h-4" />
             </div>
-            <p className="text-2xl md:text-3xl font-serif font-black">{userData.totalSolved}</p>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Solved</p>
+            <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.totalSolved}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Solved</p>
           </div>
         </Card>
-        <Card className="p-4 md:p-6 border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 text-center card-glow transition-colors duration-300">
+        <Card className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none text-center rounded-xl transition-colors duration-300">
           <div className="space-y-2">
-            <div className="w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center mx-auto">
-              <Flame className="w-4 h-4 text-accent" />
+            <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center mx-auto text-zinc-900 dark:text-zinc-50">
+              <Flame className="w-4 h-4" />
             </div>
-            <p className="text-2xl md:text-3xl font-serif font-black">{userData.currentStreak}</p>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Streak</p>
+            <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.currentStreak}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Streak</p>
           </div>
         </Card>
-        <Card className="p-4 md:p-6 border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 text-center card-glow transition-colors duration-300">
+        <Card className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none text-center rounded-xl transition-colors duration-300">
           <div className="space-y-2">
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center mx-auto">
-              <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center mx-auto text-zinc-900 dark:text-zinc-50">
+              <Calendar className="w-4 h-4" />
             </div>
-            <p className="text-2xl md:text-3xl font-serif font-black">{userData.longestStreak}</p>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Best</p>
+            <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.longestStreak}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Best</p>
           </div>
         </Card>
       </div>
 
       {/* Account Details */}
-      <Card className="border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 overflow-hidden card-glow transition-colors duration-300">
+      <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
         <CardContent className="p-0">
-          <div className="p-6 md:p-8 border-b border-black/5 dark:border-white/5">
-            <h2 className="text-xl font-serif">Account Details</h2>
+          <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
+            <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Account Details</h2>
           </div>
-          <div className="divide-y divide-black/[0.04] dark:divide-white/[0.06]">
-            <div className="flex items-center gap-4 p-5 md:p-6">
-              <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-white/5 flex items-center justify-center shrink-0">
-                <Mail className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+          <div className="divide-y divide-zinc-100 dark:divide-zinc-900">
+            <div className="flex items-center gap-4 p-5">
+              <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0 text-zinc-900 dark:text-zinc-50">
+                <Mail className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-0.5">Email</p>
-                <p className="text-sm font-medium truncate">{userData.email}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">Email</p>
+                <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{userData.email}</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 p-5 md:p-6">
-              <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-white/5 flex items-center justify-center shrink-0">
-                <Hash className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+            <div className="flex items-center gap-4 p-5">
+              <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0 text-zinc-900 dark:text-zinc-50">
+                <Hash className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-0.5">User ID</p>
-                <p className="text-sm font-medium font-mono text-slate-500 dark:text-slate-400">{userData.uid.slice(0, 12)}...</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">User ID</p>
+                <p className="text-sm font-medium font-mono text-zinc-500 dark:text-zinc-400">{userData.uid.slice(0, 12)}...</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 p-5 md:p-6">
-              <div className="w-9 h-9 rounded-xl bg-slate-50 dark:bg-white/5 flex items-center justify-center shrink-0">
-                <Calendar className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+            <div className="flex items-center gap-4 p-5">
+              <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0 text-zinc-900 dark:text-zinc-50">
+                <Calendar className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-0.5">Joined</p>
-                <p className="text-sm font-medium">{new Date(userData.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">Joined</p>
+                <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{new Date(userData.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               </div>
             </div>
           </div>
@@ -143,32 +143,32 @@ export default function ProfilePage() {
       </Card>
 
       {/* Security Zone */}
-      <Card className="border-black/5 dark:border-white/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 overflow-hidden card-glow transition-colors duration-300">
-        <CardContent className="p-6 md:p-8 space-y-6">
+      <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
+        <CardContent className="p-6 md:p-8 space-y-5">
           <div>
-            <h2 className="text-xl font-serif mb-1">Security</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Update your password to keep your account secure.</p>
+            <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Security</h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mt-1">Update your password to keep your account secure.</p>
           </div>
 
           <form onSubmit={handlePasswordChange} className="space-y-4 max-w-md">
             {passwordError && (
-              <div className="p-4 text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl font-medium flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+              <div className="p-3 text-xs text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{passwordError}</span>
               </div>
             )}
 
             {passwordSuccess && (
-              <div className="p-4 text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl font-medium flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
+              <div className="p-3 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                 <span>{passwordSuccess}</span>
               </div>
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="newPassword" className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">New Password</Label>
+              <Label htmlFor="newPassword" className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">New Password</Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 pointer-events-none" />
+                <Lock className="absolute left-3 top-3.5 h-4 w-4 text-zinc-450 dark:text-zinc-500 pointer-events-none" />
                 <Input
                   id="newPassword"
                   type="password"
@@ -176,24 +176,24 @@ export default function ProfilePage() {
                   required
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="h-12 pl-10 rounded-xl bg-slate-50/50 dark:bg-white/5 border-black/5 dark:border-white/5"
+                  className="h-10 pl-9 rounded-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm focus-visible:ring-1 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-100"
                 />
               </div>
             </div>
 
             <Button
-              className="rounded-xl px-6 font-bold flex items-center gap-2"
+              className="rounded-lg h-10 px-5 font-semibold bg-zinc-900 hover:bg-zinc-805 dark:bg-zinc-50 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 shadow-none flex items-center gap-1.5"
               type="submit"
               disabled={isUpdatingPassword}
             >
               {isUpdatingPassword ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                   Updating...
                 </>
               ) : (
                 <>
-                  <KeyRound className="w-4 h-4" />
+                  <KeyRound className="w-3.5 h-3.5" />
                   Update Password
                 </>
               )}
@@ -203,18 +203,18 @@ export default function ProfilePage() {
       </Card>
 
       {/* Danger Zone */}
-      <Card className="border-rose-100 dark:border-rose-500/20 bg-rose-50/30 dark:bg-rose-500/5 shadow-xl shadow-black/[0.02] dark:shadow-black/20 overflow-hidden transition-colors duration-300">
-        <CardContent className="p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <Card className="border border-rose-250/30 dark:border-rose-900/30 bg-rose-50/20 dark:bg-rose-950/10 shadow-none overflow-hidden transition-colors duration-300 rounded-xl">
+        <CardContent className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <h3 className="font-serif text-lg text-rose-900 dark:text-rose-300">Sign Out</h3>
-            <p className="text-sm text-rose-400 dark:text-rose-400/70">End your current session and return to the login page.</p>
+            <h3 className="text-base font-semibold text-rose-900 dark:text-rose-400">Sign Out</h3>
+            <p className="text-xs text-rose-500 dark:text-rose-550">End your current session and return to the login page.</p>
           </div>
           <Button 
             variant="destructive" 
             onClick={handleLogout}
-            className="rounded-xl px-6 font-bold flex items-center gap-2 shrink-0"
+            className="rounded-lg h-10 px-5 font-semibold bg-rose-600 hover:bg-rose-500 dark:bg-rose-900 dark:hover:bg-rose-800 text-white shadow-none flex items-center gap-1.5 shrink-0"
           >
-            <LogOut className="w-4 h-4" />
+            <LogOut className="w-3.5 h-3.5" />
             Sign Out
           </Button>
         </CardContent>

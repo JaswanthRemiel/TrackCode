@@ -8,8 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
-import { Dock } from '@/components/dock';
-import { ArrowLeft, KeyRound, RefreshCw, Send, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, KeyRound, RefreshCw, Send, AlertCircle, CheckCircle2, Mail } from 'lucide-react';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -43,65 +42,66 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
-      <Dock />
-
-      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-6 duration-700">
-        <Card className="border-black/5 dark:border-white/5 shadow-2xl shadow-black/[0.05] dark:shadow-black/30 bg-white/80 dark:bg-card/80 backdrop-blur-sm overflow-hidden transition-colors duration-300">
-          <CardHeader className="space-y-3 flex flex-col items-center pt-10 pb-2 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-primary/5 dark:bg-primary/10 flex items-center justify-center text-primary mb-2 shadow-inner">
-              <KeyRound className="w-8 h-8" />
+    <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-background text-foreground transition-colors duration-300">
+      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <Card className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-xl shadow-none overflow-hidden">
+          <CardHeader className="space-y-2 flex flex-col items-center pt-8 pb-2 text-center">
+            <div className="w-12 h-12 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50 mb-2">
+              <KeyRound className="w-6 h-6" />
             </div>
-            <CardTitle className="text-3xl font-serif">Forgot Password</CardTitle>
-            <CardDescription className="px-4 text-slate-500 dark:text-slate-400">
+            <CardTitle className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Forgot Password</CardTitle>
+            <CardDescription className="px-4 text-xs text-zinc-500 dark:text-zinc-400">
               Enter your email address and we will send you a link to reset your password.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="px-8 py-4">
+          <CardContent className="px-6 py-4">
             <form onSubmit={handleResetPassword} className="space-y-4">
               {error && (
-                <div className="p-4 text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 rounded-2xl font-medium flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                <div className="p-3 text-xs text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/20 border border-rose-100 dark:border-rose-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                   <span>{error}</span>
                 </div>
               )}
 
               {message && (
-                <div className="p-4 text-sm text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl font-medium flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
+                <div className="p-3 text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30 rounded-lg font-medium flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                   <span>{message}</span>
                 </div>
               )}
 
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-[11px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 rounded-xl bg-slate-50/50 dark:bg-white/5 border-black/5 dark:border-white/5"
-                />
+              <div className="space-y-1.5">
+                <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email Address</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-zinc-400 dark:text-zinc-500 pointer-events-none" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-10 pl-9 rounded-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm focus-visible:ring-1 focus-visible:ring-zinc-950 dark:focus-visible:ring-zinc-105"
+                  />
+                </div>
               </div>
 
               <Button
-                className="w-full h-12 rounded-xl text-white font-bold shadow-xl shadow-primary/10 flex items-center justify-center gap-2"
+                className="w-full h-10 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-50 dark:bg-zinc-50 dark:hover:bg-zinc-200 dark:text-zinc-950 shadow-none font-semibold text-sm flex items-center justify-center gap-1.5 mt-2"
                 type="submit"
                 disabled={loading || cooldown > 0}
               >
                 {loading ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                     Sending link...
                   </>
                 ) : cooldown > 0 ? (
                   `Resend link in ${cooldown}s`
                 ) : (
                   <>
-                    <Send className="w-4 h-4" />
+                    <Send className="w-3.5 h-3.5" />
                     Send Reset Link
                   </>
                 )}
@@ -109,12 +109,12 @@ export default function ForgotPasswordPage() {
             </form>
           </CardContent>
 
-          <CardFooter className="flex justify-center pb-8 pt-2">
+          <CardFooter className="flex justify-center pb-6 pt-2">
             <Link
               href="/login"
-              className="text-sm font-bold text-slate-400 hover:text-primary transition-colors flex items-center gap-1.5"
+              className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors flex items-center gap-1.5"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-3.5 h-3.5" />
               Back to sign in
             </Link>
           </CardFooter>

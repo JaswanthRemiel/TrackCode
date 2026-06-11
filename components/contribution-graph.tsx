@@ -1,6 +1,7 @@
 'use client';
 
 import { ActivityCalendar, ThemeInput } from 'react-activity-calendar';
+import 'react-activity-calendar/tooltips.css';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -21,8 +22,8 @@ export function ContributionGraph({ data }: ContributionGraphProps) {
   useEffect(() => setMounted(true), []);
 
   const customTheme: ThemeInput = {
-    light: ['#f0f0f0', '#ffcdb2', '#ff9b6a', '#ff6b2b', '#FF4D00'],
-    dark: ['#1a1a1a', '#4a2000', '#7a3500', '#b05000', '#FF4D00'],
+    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
   };
 
   const colorScheme = mounted && theme === 'dark' ? 'dark' : 'light';
@@ -33,6 +34,19 @@ export function ContributionGraph({ data }: ContributionGraphProps) {
         data={data}
         theme={customTheme}
         colorScheme={colorScheme}
+        tooltips={{
+          activity: {
+            text: (activity) => {
+              const date = new Date(activity.date);
+              const formattedDate = date.toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+              });
+              return `${activity.count} ${activity.count === 1 ? 'problem' : 'problems'} solved on ${formattedDate}`;
+            },
+          },
+        }}
         labels={{
           legend: {
             less: 'Less',

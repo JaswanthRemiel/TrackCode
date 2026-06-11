@@ -12,19 +12,19 @@ import {
   Activity,
   LayoutDashboard,
   Building2,
-  BarChart3,
   User,
   LogOut,
   ArrowUpRight,
   Sun,
   Moon,
+  BookOpen,
+  Settings,
 } from 'lucide-react';
 
 const AUTH_NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/companies', label: 'Companies', icon: Building2 },
-  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { href: '/profile', label: 'Profile', icon: User },
+  { href: '/problems', label: 'Problems', icon: BookOpen },
 ];
 
 const GUEST_NAV_ITEMS = [
@@ -55,71 +55,109 @@ export function Dock() {
   const navItems = userData ? AUTH_NAV_ITEMS : GUEST_NAV_ITEMS;
 
   return (
-    <div className="fixed bottom-5 md:bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none dock-enter">
-      <nav className="pointer-events-auto dock-glass rounded-2xl p-1.5 flex items-center shadow-2xl shadow-black/50 gap-1 scale-[0.92] sm:scale-100 transition-transform duration-300">
+    <div className="fixed bottom-5 left-0 right-0 justify-center px-4 z-50 flex pointer-events-none md:fixed md:top-0 md:bottom-0 md:left-0 md:h-screen md:w-16 md:right-auto md:px-0 md:flex-col md:justify-between">
+      <nav className="pointer-events-auto flex flex-row md:flex-col justify-between items-center w-full h-full p-1.5 md:p-3 bg-white/95 dark:bg-zinc-950/95 border border-zinc-200 dark:border-zinc-850 md:bg-white md:dark:bg-black md:border-0 md:border-r md:border-zinc-200 md:dark:border-zinc-900 rounded-2xl md:rounded-none shadow-xl md:shadow-none transition-all duration-300">
         
-        {/* Logo */}
-        <Link href="/" className="flex items-center justify-center w-10 h-10 group mr-1.5">
-          <div className="bg-white text-black p-1.5 rounded-xl group-hover:rotate-12 transition-transform duration-500">
-            <Activity className="h-4 w-4" />
+        {/* Top Section */}
+        <div className="flex md:flex-col items-center gap-1.5 md:gap-4 w-auto md:w-full">
+          {/* Logo */}
+          <div className="relative group">
+            <Link href="/" className="w-10 h-10 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center font-bold text-zinc-900 dark:text-zinc-50 text-xs hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:scale-105 transition-all">
+              TC
+            </Link>
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+              Home
+            </div>
           </div>
-        </Link>
 
-        {/* Separator */}
-        <div className="h-6 w-px bg-white/10 mx-0.5" />
+          {/* Separator - only on desktop */}
+          <div className="hidden md:block w-8 h-px bg-zinc-200 dark:bg-zinc-800/80 my-1" />
 
-        {/* Nav Links */}
-        <div className="flex items-center bg-white/[0.04] rounded-xl p-1 gap-0.5">
-          {navItems.map((item) => (
-            <DockItem
-              key={item.href}
-              href={item.href}
-              label={item.label}
-              icon={item.icon}
-              pathname={pathname}
-            />
-          ))}
+          {/* Nav Items */}
+          <div className="flex md:flex-col items-center gap-1 w-auto md:w-full">
+            {navItems.map((item) => (
+              <DockItem
+                key={item.href}
+                href={item.href}
+                label={item.label}
+                icon={item.icon}
+                pathname={pathname}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Separator */}
-        <div className="h-6 w-px bg-white/10 mx-0.5" />
-
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="w-9 h-9 rounded-xl flex items-center justify-center text-white/40 hover:text-amber-300 hover:bg-white/[0.06] transition-all duration-300 cursor-pointer"
-          aria-label="Toggle theme"
-        >
-          {mounted ? (
-            theme === 'dark' ? (
-              <Sun className="w-4 h-4 transition-transform duration-500 rotate-0 hover:rotate-90" />
-            ) : (
-              <Moon className="w-4 h-4 transition-transform duration-500" />
-            )
-          ) : (
-            <Moon className="w-4 h-4" />
-          )}
-        </button>
-
-        {/* User Actions */}
-        {userData && (
-          <>
-            <div className="flex items-center gap-0.5 pr-0.5">
-              {/* Avatar */}
-              <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/[0.06] flex items-center justify-center text-[11px] font-black text-white/70 uppercase select-none">
-                {userData.email ? userData.email[0] : 'U'}
-              </div>
-              {/* Logout */}
-              <button
-                onClick={handleLogout}
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-rose-400/50 hover:text-rose-400 hover:bg-rose-500/10 transition-all duration-300 cursor-pointer"
-                aria-label="Sign out"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
+        {/* Bottom Section */}
+        <div className="flex md:flex-col items-center gap-1.5 md:gap-4 w-auto md:w-full">
+          {/* Theme Toggle */}
+          <div className="relative group">
+            <button
+              onClick={toggleTheme}
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-amber-500 dark:hover:text-amber-300 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-300 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {mounted ? (
+                theme === 'dark' ? (
+                  <Sun className="w-4 h-4 transition-transform duration-500 rotate-0 hover:rotate-90" />
+                ) : (
+                  <Moon className="w-4 h-4 transition-transform duration-500" />
+                )
+              ) : (
+                <Moon className="w-4 h-4" />
+              )}
+            </button>
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+              Theme
             </div>
-          </>
-        )}
+          </div>
+
+          {/* Profile Avatar */}
+          {userData ? (
+            <>
+              <Link
+                href="/profile"
+                className={cn(
+                  "relative group w-10 h-10 rounded-xl border flex items-center justify-center text-[11px] font-black uppercase select-none transition-all duration-300 pointer-events-auto",
+                  pathname === '/profile'
+                    ? "bg-zinc-950 text-zinc-50 dark:bg-white dark:text-black border-transparent shadow-lg"
+                    : "bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-805 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
+                )}
+              >
+                {userData.email ? userData.email[0] : 'U'}
+                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+                  Profile
+                </div>
+              </Link>
+
+              {/* Logout */}
+              <div className="relative group hidden md:block">
+                <button
+                  onClick={handleLogout}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-500 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all duration-300 cursor-pointer pointer-events-auto"
+                  aria-label="Sign out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+                  Sign Out
+                </div>
+              </div>
+            </>
+          ) : null}
+
+          {/* Settings Gear Icon */}
+          <div className="relative group hidden md:block">
+            <Link
+              href={userData ? "/profile" : "/login"}
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-300 pointer-events-auto"
+            >
+              <Settings className="w-4 h-4" />
+            </Link>
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+              Settings
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   );
@@ -144,30 +182,23 @@ function DockItem({
     <Link
       href={href}
       className={cn(
-        'group relative flex items-center h-9 px-3 transition-all duration-500 rounded-lg overflow-hidden',
+        'group relative flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-xl pointer-events-auto',
         isActive
-          ? 'bg-white text-black'
-          : 'text-white/40 hover:text-white hover:bg-white/[0.06]'
+          ? 'bg-zinc-950 text-zinc-50 dark:bg-white dark:text-black shadow-md'
+          : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900'
       )}
     >
       <Icon
         className={cn(
-          'w-4 h-4 shrink-0 transition-transform duration-500',
-          isActive ? 'scale-110' : 'group-hover:scale-110'
+          'w-4 h-4 shrink-0 transition-transform duration-300',
+          isActive ? 'scale-105' : 'group-hover:scale-105'
         )}
       />
-      <div
-        className={cn(
-          'grid transition-all duration-500 ease-in-out',
-          isActive
-            ? 'grid-cols-[1fr] ml-2 opacity-100'
-            : 'grid-cols-[0fr] opacity-0 group-hover:grid-cols-[1fr] group-hover:ml-2 group-hover:opacity-100'
-        )}
-      >
-        <span className="overflow-hidden whitespace-nowrap text-[11px] font-black uppercase tracking-widest leading-none">
-          {label}
-        </span>
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
+        {label}
       </div>
     </Link>
   );
 }
+
+
