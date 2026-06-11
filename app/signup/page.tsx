@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
@@ -39,7 +39,8 @@ export default function SignupPage() {
       };
 
       await setDoc(doc(db, 'users', user.uid), userData);
-      router.push('/dashboard');
+      await sendEmailVerification(user);
+      router.push('/verify-email');
     } catch (err: any) {
       setError(err.message || 'Failed to create account');
     } finally {

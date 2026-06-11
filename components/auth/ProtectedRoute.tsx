@@ -9,8 +9,12 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login');
+    if (!loading) {
+      if (!user) {
+        router.push('/login');
+      } else if (!user.emailVerified) {
+        router.push('/verify-email');
+      }
     }
   }, [user, loading, router]);
 
@@ -18,7 +22,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return <div className="min-h-full flex items-center justify-center p-12">Loading...</div>;
   }
 
-  if (!user) {
+  if (!user || !user.emailVerified) {
     return null;
   }
 
