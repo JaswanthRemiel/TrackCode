@@ -57,7 +57,7 @@ export function Dock() {
   return (
     <div className="fixed bottom-5 left-0 right-0 justify-center px-4 z-50 flex pointer-events-none md:fixed md:top-0 md:bottom-0 md:left-0 md:h-screen md:w-16 md:right-auto md:px-0 md:flex-col md:justify-between">
       <nav className="pointer-events-auto flex flex-row md:flex-col justify-between items-center w-full h-full p-1.5 md:p-3 bg-white/95 dark:bg-zinc-950/95 border border-zinc-200 dark:border-zinc-850 md:bg-white md:dark:bg-black md:border-0 md:border-r md:border-zinc-200 md:dark:border-zinc-900 rounded-2xl md:rounded-none shadow-xl md:shadow-none transition-all duration-300">
-        
+
         {/* Top Section */}
         <div className="flex md:flex-col items-center gap-1.5 md:gap-4 w-auto md:w-full">
           {/* Logo */}
@@ -146,17 +146,7 @@ export function Dock() {
           ) : null}
 
           {/* Settings Gear Icon */}
-          <div className="relative group hidden md:block">
-            <Link
-              href={userData ? "/profile" : "/login"}
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-300 pointer-events-auto"
-            >
-              <Settings className="w-4 h-4" />
-            </Link>
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
-              Settings
-            </div>
-          </div>
+
         </div>
       </nav>
     </div>
