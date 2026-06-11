@@ -7,16 +7,21 @@ import { useData } from '@/components/data/DataProvider';
 import { useMemo } from 'react';
 import { BarChart3, PieChart as PieChartIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useUserActivity } from '@/hooks/useUserActivity';
 
 const LIGHT_COLORS = ['#111111', '#FF4D00', '#666666'];
 const DARK_COLORS = ['#e5e5e5', '#FF4D00', '#888888'];
 
 export default function AnalyticsPage() {
   const { userData } = useAuth();
-  const { problems, userProgress, activity, loading } = useData();
+  const { problems, userProgress, loading: dataLoading } = useData();
+  const { activity, loading: activityLoading } = useUserActivity(userData?.uid);
   const { theme } = useTheme();
+  
   const isDark = theme === 'dark';
   const colors = isDark ? DARK_COLORS : LIGHT_COLORS;
+  
+  const loading = dataLoading || activityLoading;
 
   const difficultyData = useMemo(() => {
     const problemMap: Record<string, string> = {};
@@ -63,7 +68,7 @@ export default function AnalyticsPage() {
   const hasData = difficultyData.some(d => d.value > 0) || weeklyData.some(d => d.solved > 0);
 
   return (
-    <div className="space-y-6 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-6 md:space-y-10 px-4 md:px-0 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-4xl md:text-6xl font-serif">Intelligence.</h1>

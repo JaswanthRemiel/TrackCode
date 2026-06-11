@@ -95,8 +95,8 @@ async function run() {
   const outputArray = Array.from(allProblemsMap.values());
   console.log(`Total unique problems: ${outputArray.length}`);
   
-  fs.writeFileSync(path.join(__dirname, 'problems.json'), JSON.stringify(outputArray, null, 2));
-  console.log("Saved local json output!");
+  fs.writeFileSync(path.join(__dirname, '../public/problems.json'), JSON.stringify(outputArray, null, 2));
+  console.log("Saved local json output to public/problems.json!");
 
   if (db && process.env.FIREBASE_ADMIN_PROJECT_ID) {
     console.log("Uploading to Firestore...");

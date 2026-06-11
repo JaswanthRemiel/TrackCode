@@ -7,10 +7,14 @@ import { StreakWidget } from '@/components/streak-widget';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useMemo } from 'react';
 import { Building2, CheckCircle } from 'lucide-react';
+import { useUserActivity } from '@/hooks/useUserActivity';
 
 export default function DashboardPage() {
   const { userData } = useAuth();
-  const { activity, problems, userProgress, loading } = useData();
+  const { problems, userProgress, loading: dataLoading } = useData();
+  const { activity, loading: activityLoading } = useUserActivity(userData?.uid);
+
+  const loading = dataLoading || activityLoading;
 
   const activityData = useMemo(() => {
     const data: any[] = activity.map(act => {

@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/components/auth/AuthProvider';
 import { useData } from '@/components/data/DataProvider';
+import { useUserNotes } from '@/hooks/useUserNotes';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -36,7 +37,9 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
   const params = use(props.params);
   const companyName = decodeURIComponent(params.company);
   const { userData } = useAuth();
-  const { problems: allProblems, userProgress: progress, notes, loading } = useData();
+  const { problems: allProblems, userProgress: progress, loading: dataLoading } = useData();
+  const { notes, loading: notesLoading } = useUserNotes(userData?.uid);
+  const loading = dataLoading || notesLoading;
 
   const problems = useMemo(() => {
     const list = allProblems.filter(p => {

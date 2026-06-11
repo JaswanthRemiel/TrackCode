@@ -2,23 +2,19 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
-import { collection, onSnapshot, query, where, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useAuth } from '../auth/AuthProvider';
-import { Problem, UserProgress, DailyActivity, Note } from '@/types';
+import { Problem, UserProgress } from '@/types';
 
 interface DataContextType {
   problems: Problem[];
   userProgress: Record<string, UserProgress>;
-  notes: Record<string, string>;
-  activity: DailyActivity[];
   loading: boolean;
 }
 
 const DataContext = createContext<DataContextType>({
   problems: [],
   userProgress: {},
-  notes: {},
-  activity: [],
   loading: true,
 });
 
@@ -26,10 +22,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const { userData } = useAuth();
   const [problems, setProblems] = useState<Problem[]>([]);
   const [userProgress, setUserProgress] = useState<Record<string, UserProgress>>({});
-  const [notes, setNotes] = useState<Record<string, string>>({});
-  const [activity, setActivity] = useState<DailyActivity[]>([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -47,12 +40,9 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
           return;
         }
 
-        const snap = await getDocs(collection(db, 'problems'));
-        const ps: Problem[] = [];
-        snap.forEach(d => {
-          const data = d.data();
-          ps.push({ ...data, id: d.id } as Problem);
-        });
+        const res = await fetch('/problems.json');
+        if (!res.ok) throw new Error("Failed to load static problems list");
+        const ps: Problem[] = await res.json();
         
         setProblems(ps);
         if (typeof window !== 'undefined') {
@@ -66,18 +56,14 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
     fetchProblems();
   }, []);
 
-
   useEffect(() => {
     if (!userData) {
       setUserProgress({});
-      setNotes({});
-      setActivity([]);
       setLoading(false);
       return;
     }
 
     setLoading(true);
-
 
     const qProg = query(collection(db, 'userProgress'), where('userId', '==', userData.uid));
     const unsubProg = onSnapshot(qProg, (snap) => {
@@ -93,34 +79,13 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(false);
     });
 
-
-    const qNotes = query(collection(db, 'notes'), where('userId', '==', userData.uid));
-    const unsubNotes = onSnapshot(qNotes, (snap) => {
-      const n: Record<string, string> = {};
-      snap.forEach(d => {
-        const data = d.data() as Note;
-        n[data.problemId] = data.content;
-      });
-      setNotes(n);
-    }, (e) => console.error("Notes subscription error", e));
-
-
-    const qAct = query(collection(db, 'dailyActivity'), where('userId', '==', userData.uid));
-    const unsubAct = onSnapshot(qAct, (snap) => {
-      const a: DailyActivity[] = [];
-      snap.forEach(d => a.push(d.data() as DailyActivity));
-      setActivity(a);
-    }, (e) => console.error("Activity subscription error", e));
-
     return () => {
       unsubProg();
-      unsubNotes();
-      unsubAct();
     };
   }, [userData?.uid]);
 
   return (
-    <DataContext.Provider value={{ problems, userProgress, notes, activity, loading }}>
+    <DataContext.Provider value={{ problems, userProgress, loading }}>
       {children}
     </DataContext.Provider>
   );

@@ -18,8 +18,8 @@ if (!admin.apps.length) {
 const db = admin.firestore();
 
 async function run() {
-  console.log("Reading local problems.json...");
-  const raw = fs.readFileSync(path.join(__dirname, 'problems.json'), 'utf-8');
+  console.log("Reading local problems.json from public/problems.json...");
+  const raw = fs.readFileSync(path.join(__dirname, '../public/problems.json'), 'utf-8');
   const outputArray = JSON.parse(raw);
   
   console.log(`Found ${outputArray.length} problems to upload.`);
