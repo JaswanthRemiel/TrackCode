@@ -6,6 +6,7 @@ export interface User {
   longestStreak: number;
   totalSolved: number;
   lastActiveDate?: string;
+  leetcodeUsername?: string;
 }
 
 export interface Problem {

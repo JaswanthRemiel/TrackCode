@@ -367,7 +367,7 @@ export default function ProblemsPage() {
                               </span>
                             ))}
                             {companies.length > 3 && (
-                              <span className="text-[9px] font-semibold text-zinc-400 dark:text-zinc-505 self-center">
+                              <span className="text-[9px] font-semibold text-zinc-400 dark:text-zinc-500 self-center">
                                 +{companies.length - 3} more
                               </span>
                             )}
@@ -384,7 +384,7 @@ export default function ProblemsPage() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="w-[160px] rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-1.5 shadow-md">
                               <DropdownMenuItem onClick={() => openNoteDialog(problem.id, problem.title)} className="gap-2 font-medium px-2 py-1.5 cursor-pointer text-xs hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded">
-                                <StickyNote className="w-3.5 h-3.5 text-zinc-555" />
+                                <StickyNote className="w-3.5 h-3.5 text-zinc-500" />
                                 Personal Note
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => copyToClipboard(problem.leetcodeUrl)} className="gap-2 font-medium px-2 py-1.5 cursor-pointer text-xs hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded">
@@ -405,9 +405,9 @@ export default function ProblemsPage() {
           {/* Pagination Controls */}
           {totalPages > 1 && (
             <div className="p-4 md:p-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-4">
-              <span className="text-xs text-zinc-555 dark:text-zinc-405 font-medium">
-                Page {currentPage} of {totalPages} (Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, filteredProblems.length)} of {filteredProblems.length} matching)
-              </span>
+                              <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                                Page {currentPage} of {totalPages} (Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} - {Math.min(currentPage * ITEMS_PER_PAGE, filteredProblems.length)} of {filteredProblems.length} matching)
+                              </span>
               
               <div className="flex items-center gap-1">
                 <Button

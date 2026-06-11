@@ -98,12 +98,11 @@ export default function CompaniesPage() {
               <Link key={company.name} href={`/companies/${encodeURIComponent(company.name)}`}>
                 <Card className="group h-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-350 dark:hover:border-zinc-700 shadow-none transition-colors duration-200 p-6 flex flex-col justify-between min-h-[200px] rounded-xl">
                   
-                  {/* Top Row: Company Name and Checkbox */}
+                  {/* Top Row: Company Name */}
                   <div className="flex justify-between items-start">
                     <CardTitle className="text-lg md:text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 capitalize">
                       {company.name}
                     </CardTitle>
-                    <div className="w-4 h-4 rounded bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shrink-0" />
                   </div>
 
                   {/* Middle Row: Progress info */}

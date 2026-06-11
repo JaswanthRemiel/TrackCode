@@ -8,6 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useMemo, useEffect } from 'react';
 import { Building2, CheckCircle } from 'lucide-react';
 import { useUserActivity } from '@/hooks/useUserActivity';
+import { LeetCodeStatsWidget } from '@/components/leetcode-stats-widget';
+import { AirportClock } from '@/components/airport-clock';
+
 export default function DashboardPage() {
   const { userData } = useAuth();
   const { problems, userProgress, loading: dataLoading } = useData();
@@ -63,6 +66,16 @@ export default function DashboardPage() {
           <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">Welcome back, {userData.email}</p>
         </div>
         <StreakWidget currentStreak={userData.currentStreak} longestStreak={userData.longestStreak} />
+      </div>
+
+      {/* LeetCode & Airport Clock Row */}
+      <div className="grid gap-4 md:gap-6 grid-cols-1 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <LeetCodeStatsWidget />
+        </div>
+        <div className="lg:col-span-1">
+          <AirportClock />
+        </div>
       </div>
 
       {/* Stats Row */}
