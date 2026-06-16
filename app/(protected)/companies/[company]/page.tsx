@@ -59,6 +59,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
   const [search, setSearch] = useState('');
   const deferredSearch = useDeferredValue(search);
   const [difficultyFilter, setDifficultyFilter] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
   const [editingNote, setEditingNote] = useState<{ id: string, title: string } | null>(null);
   const [noteContent, setNoteContent] = useState('');
@@ -173,9 +174,11 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
       const matchesSearch = p.title.toLowerCase().includes(deferredSearch.toLowerCase()) ||
         p.tags.some(t => t.toLowerCase().includes(deferredSearch.toLowerCase()));
       const matchesDiff = difficultyFilter ? p.difficulty === difficultyFilter : true;
-      return matchesSearch && matchesDiff;
+      const stat = progress[p.id]?.status || 'todo';
+      const matchesStatus = statusFilter ? stat === statusFilter : true;
+      return matchesSearch && matchesDiff && matchesStatus;
     });
-  }, [problems, deferredSearch, difficultyFilter]);
+  }, [problems, deferredSearch, difficultyFilter, statusFilter, progress]);
 
   const solvedProblems = problems.filter(p => progress[p.id]?.status === 'done');
   const solvedCount = solvedProblems.length;
@@ -239,8 +242,8 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
 
       <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none overflow-hidden rounded-xl bg-white dark:bg-zinc-950 transition-colors duration-300">
         <CardContent className="p-0">
-          <div className="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row gap-4 justify-between md:items-center">
-            <div className="relative w-full md:max-w-sm">
+          <div className="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row gap-4 justify-between sm:items-center">
+            <div className="relative w-full sm:max-w-sm">
               <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-400 dark:text-zinc-500 pointer-events-none" />
               <Input
                 placeholder="Search problems or topics..."
@@ -249,18 +252,34 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger className={buttonVariants({ variant: "outline", size: "sm", className: "w-full md:w-auto md:min-w-[180px] px-4 gap-3 h-10 justify-between rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs font-semibold bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900" })}>
-                {difficultyFilter ? difficultyFilter : 'All Difficulties'}
-                <Filter className="w-3.5 h-3.5 opacity-50" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-lg">
-                <DropdownMenuItem onClick={() => setDifficultyFilter(null)} className="text-xs cursor-pointer">All</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setDifficultyFilter('EASY')} className="text-xs cursor-pointer text-emerald-600">Easy</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setDifficultyFilter('MEDIUM')} className="text-xs cursor-pointer text-amber-600">Medium</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setDifficultyFilter('HARD')} className="text-xs cursor-pointer text-rose-600">Hard</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            
+            <div className="flex gap-2 w-full sm:w-auto">
+              <DropdownMenu>
+                <DropdownMenuTrigger className={buttonVariants({ variant: "outline", size: "sm", className: "w-1/2 sm:w-auto sm:min-w-[180px] px-4 gap-3 h-10 justify-between rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs font-semibold bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900" })}>
+                  {difficultyFilter ? difficultyFilter : 'All Difficulties'}
+                  <Filter className="w-3.5 h-3.5 opacity-50" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-lg">
+                  <DropdownMenuItem onClick={() => setDifficultyFilter(null)} className="text-xs cursor-pointer">All</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setDifficultyFilter('EASY')} className="text-xs cursor-pointer text-emerald-600">Easy</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setDifficultyFilter('MEDIUM')} className="text-xs cursor-pointer text-amber-600">Medium</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setDifficultyFilter('HARD')} className="text-xs cursor-pointer text-rose-600">Hard</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className={buttonVariants({ variant: "outline", size: "sm", className: "w-1/2 sm:w-auto sm:min-w-[160px] px-4 gap-3 h-10 justify-between rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs font-semibold bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900" })}>
+                  {statusFilter === 'todo' ? 'Todo' : statusFilter === 'done' ? 'Done' : statusFilter === 'revision' ? 'Revise' : 'All Statuses'}
+                  <Filter className="w-3.5 h-3.5 opacity-50" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-lg">
+                  <DropdownMenuItem onClick={() => setStatusFilter(null)} className="text-xs cursor-pointer">All Statuses</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setStatusFilter('todo')} className="text-xs cursor-pointer text-zinc-500">Todo</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setStatusFilter('done')} className="text-xs cursor-pointer text-emerald-600">Done</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setStatusFilter('revision')} className="text-xs cursor-pointer text-amber-600">Revise</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
 
           <div className="overflow-x-auto w-full scrollbar-hide">

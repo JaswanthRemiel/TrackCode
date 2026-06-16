@@ -93,16 +93,20 @@ export default function Home() {
               <div className="space-y-2">
                 <div className="h-2.5 w-28 bg-zinc-100 dark:bg-zinc-900 rounded" />
                 <div className="grid grid-cols-[repeat(26,_1fr)] gap-1">
-                  {Array.from({ length: 182 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="aspect-square rounded-sm"
-                      style={{
-                        backgroundColor: `var(--accent)`,
-                        opacity: Math.random() > 0.6 ? Math.random() * 0.7 + 0.1 : 0.05
-                      }}
-                    />
-                  ))}
+                  {Array.from({ length: 182 }).map((_, i) => {
+                    const pseudoRandom = ((i * 17) % 100) / 100;
+                    const opacity = pseudoRandom > 0.6 ? pseudoRandom * 0.7 + 0.1 : 0.05;
+                    return (
+                      <div
+                        key={i}
+                        className="aspect-square rounded-sm"
+                        style={{
+                          backgroundColor: `var(--accent)`,
+                          opacity
+                        }}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </div>

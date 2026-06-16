@@ -126,7 +126,7 @@ export default function CompaniesPage() {
                         Completed
                       </span>
                     ) : isInProgress ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-50 dark:bg-amber-950/30 border border-amber-255/20 dark:border-amber-900/30 text-amber-700 dark:text-amber-400">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-50 dark:bg-amber-950/30 border border-amber-255/20 dark:border-emerald-900/30 text-amber-700 dark:text-amber-400">
                         In progress
                       </span>
                     ) : (
