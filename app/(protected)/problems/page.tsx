@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useAuth } from '@/components/auth/AuthProvider';
 import { useData } from '@/components/data/DataProvider';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -320,9 +322,11 @@ export default function ProblemsPage() {
                         </TableCell>
                         <TableCell className="font-medium">
                           <div className="flex items-center gap-2 py-1">
-                            <a href={problem.leetcodeUrl} target="_blank" rel="noreferrer" className="hover:underline flex items-center gap-1 group/link">
+                            <Link href={`/problems/${problem.id}`} className="hover:underline">
                               <span className="text-sm text-zinc-800 dark:text-zinc-200 transition-colors group-hover:text-zinc-950 dark:group-hover:text-zinc-50 leading-tight">{problem.title}</span>
-                              <ExternalLink className="w-3 h-3 shrink-0 opacity-10 group-hover/link:opacity-100 transition-opacity text-zinc-500" />
+                            </Link>
+                            <a href={problem.leetcodeUrl} target="_blank" rel="noreferrer" title="Open on LeetCode" className="shrink-0 opacity-20 hover:opacity-100 transition-opacity text-zinc-500">
+                              <ExternalLink className="w-3 h-3" />
                             </a>
                             {notes[problem.id] && (
                               <button

@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
+import { Logo } from '@/components/brand/Logo';
 import { ArrowRight, Mail, Lock } from 'lucide-react';
 import { User } from '@/types';
 
@@ -52,8 +53,8 @@ export default function SignupPage() {
       <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500">
         <Card className="border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 rounded-xl shadow-none overflow-hidden">
           <CardHeader className="space-y-2 flex flex-col items-center pt-8 pb-4 text-center">
-            <Link href="/" className="flex items-center space-x-2 mb-2 group">
-              <span className="font-semibold text-xl tracking-tight text-zinc-900 dark:text-zinc-50">TrackCode</span>
+            <Link href="/" className="mb-2 text-zinc-900 dark:text-zinc-50" aria-label="TrackCode home">
+              <Logo size={28} />
             </Link>
             <CardTitle className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Create an account</CardTitle>
             <CardDescription className="text-xs text-zinc-500 dark:text-zinc-400">

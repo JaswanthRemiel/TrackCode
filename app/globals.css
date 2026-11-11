@@ -10,12 +10,13 @@
   --font-sans: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-serif: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-heading: var(--font-geist-mono);
+  --font-brand: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
 
-  --color-accent: #FF4D00;
-  --color-accent-foreground: #FFFFFF;
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
 
   --radius-3xl: 1.5rem;
   --radius-4xl: 2rem;
@@ -37,8 +38,17 @@
   --secondary-foreground: #111111;
   --muted: #F3F3F3;
   --muted-foreground: #666666;
-  --accent: #FF4D00;
+  --accent: #15803D;
   --accent-foreground: #FFFFFF;
+  --brand: #15803D;
+  --mark-0: #166534;
+  --mark-1: #15803D;
+  --mark-2: #22C55E;
+  --mark-3: #16A34A;
+  --mark-4: #15803D;
+  --mark-off: #E5E9EE;
+  --mark-tile: #FFFFFF;
+  --mark-tile-border: #D0D7DE;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #E5E5E5;
   --input: #E5E5E5;
@@ -59,8 +69,17 @@
   --secondary-foreground: #e5e5e5;
   --muted: #1a1a1a;
   --muted-foreground: #888888;
-  --accent: #FF4D00;
-  --accent-foreground: #FFFFFF;
+  --accent: #4ADE80;
+  --accent-foreground: #0D1117;
+  --brand: #4ADE80;
+  --mark-0: #2EA043;
+  --mark-1: #3FB950;
+  --mark-2: #56D364;
+  --mark-3: #3FB950;
+  --mark-4: #2EA043;
+  --mark-off: #21262D;
+  --mark-tile: #0D1117;
+  --mark-tile-border: #21262D;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #262626;
   --input: #262626;
@@ -144,3 +163,183 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+/* ---------- Landing page ---------- */
+.tc-land {
+  /* TrackCode brand, dark lockup */
+  --canvas: #0d1117;
+  --surface: #161b22;
+  --ink: #f0f3f6;
+  --ink-soft: #9ea7b3;
+  --ink-faint: #7d8590;
+  --line: rgba(240, 243, 246, 0.08);
+  --line-strong: rgba(240, 243, 246, 0.2);
+  --accent: #4ade80;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  background: var(--canvas);
+  color: var(--ink);
+  letter-spacing: 0.003em;
+  caret-color: var(--accent);
+}
+
+.tc-land ::selection { background: var(--accent); color: var(--canvas); }
+
+.tc-grain {
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* One soft key light from the top left, no glow blobs. */
+.tc-hero-light {
+  background:
+    radial-gradient(60% 70% at 18% 0%, rgba(74, 222, 128, 0.06), transparent 70%),
+    linear-gradient(to bottom, rgba(240, 243, 246, 0.025), transparent 60%);
+}
+
+.tc-link { transition: color 150ms var(--ease-out); text-underline-offset: 4px; }
+.tc-link:hover { color: var(--ink); }
+
+.tc-focus:focus-visible,
+.tc-land a:focus-visible,
+.tc-land button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.tc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: transform 140ms var(--ease-out), background-color 150ms var(--ease-out);
+}
+.tc-btn:active { transform: scale(0.97); }
+.tc-btn-primary {
+  background: var(--ink);
+  color: var(--canvas);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 1px 2px rgba(1, 4, 9, 0.5), 0 6px 16px -6px rgba(1, 4, 9, 0.6);
+}
+.tc-btn-primary:hover { background: #ffffff; }
+
+/* Raised surface: edge light on top, warm-tinted offset shadow below. */
+.tc-panel {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow:
+    inset 0 1px 0 rgba(240, 243, 246, 0.06),
+    0 2px 4px rgba(1, 4, 9, 0.35),
+    0 24px 48px -16px rgba(1, 4, 9, 0.75);
+}
+
+/* Hero entrance */
+@keyframes tc-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.tc-hero-in { animation: tc-rise 800ms var(--ease-out) both; }
+
+/* Company word swap */
+@keyframes tc-word-in {
+  from { opacity: 0; transform: translateY(0.45em); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes tc-word-out {
+  from { opacity: 1; transform: none; filter: blur(0); }
+  to { opacity: 0; transform: translateY(-0.45em); filter: blur(6px); }
+}
+.tc-word-in { animation: tc-word-in 560ms var(--ease-out) both; }
+.tc-word-out { animation: tc-word-out 420ms var(--ease-out) both; pointer-events: none; }
+
+/* Timer that drives the cycle; hovering the panel pauses it. */
+@keyframes tc-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.tc-timer { animation: tc-timer 3600ms linear both; }
+.tc-panel:hover .tc-timer,
+.tc-panel:focus-within .tc-timer { animation-play-state: paused; }
+
+@keyframes tc-row-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.tc-row { animation: tc-row-in 460ms var(--ease-out) both; }
+
+/* Scroll reveal */
+.tc-reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+.tc-reveal[data-in='true'] { opacity: 1; transform: none; }
+
+/* Hint ladder */
+.tc-rung { opacity: 0.22; transform: translateY(6px); transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out); }
+.tc-rung[data-on='true'] { opacity: 1; transform: none; }
+.tc-rung .tc-code { clip-path: inset(0 0 100% 0); transition: clip-path 700ms var(--ease-out) 150ms; }
+.tc-rung[data-on='true'] .tc-code { clip-path: inset(0 0 0 0); }
+
+/* Plan checkmarks */
+.tc-check[data-done='true'] { background: transparent; color: var(--canvas); transition: background-color 250ms var(--ease-out); }
+[data-in='true'] .tc-check[data-done='true'] { background: var(--accent); }
+.tc-check svg { opacity: 0; transform: scale(0.95); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); transition-delay: inherit; }
+[data-in='true'] .tc-check svg { opacity: 1; transform: none; }
+.tc-strike { background: linear-gradient(currentColor, currentColor) 0 55% / 0% 1px no-repeat; transition: background-size 350ms var(--ease-out), color 350ms var(--ease-out); }
+[data-in='true'] .tc-strike { background-size: 100% 1px; color: var(--ink-faint); }
+
+/* Centered hero: product window tilted back, flattening as you scroll (--tilt 1 to 0). */
+.tc-stage { perspective: 1600px; --tilt: 1; }
+.tc-window {
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(240, 243, 246, 0.07),
+    0 2px 6px rgba(1, 4, 9, 0.4),
+    0 40px 80px -24px rgba(1, 4, 9, 0.85);
+  transform-origin: 50% 0%;
+  transform: rotateX(calc(var(--tilt) * 14deg)) scale(calc(1 - var(--tilt) * 0.04));
+  transition: transform 80ms linear;
+}
+.tc-chat { border: 1px solid var(--line); background: var(--canvas); box-shadow: inset 0 1px 0 rgba(240, 243, 246, 0.05), 0 16px 32px -12px rgba(1, 4, 9, 0.7); }
+.tc-done { background: var(--accent); color: var(--canvas); }
+
+@keyframes tc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.tc-float { animation: tc-float 7s ease-in-out infinite; }
+
+/* Chat lines appear one after another */
+.tc-seq { animation: tc-rise 500ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
+
+@keyframes tc-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.tc-caret { animation: tc-caret 1s step-end infinite; }
+
+/* Logo mark: lit cells fill in like a day of solves */
+@keyframes tc-mark-on { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: none; } }
+.tc-mark-animated .tc-mark-on { animation: tc-mark-on 420ms var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) both; animation-delay: calc(var(--i) * 70ms + 150ms); }
+
+/* Reduced motion: keep the fades that carry meaning, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .tc-hero-in, .tc-row { animation-name: tc-fade; transform: none; }
+  .tc-word-in { animation: tc-fade 200ms ease-out both; }
+  .tc-word-out { animation: tc-fade-out 200ms ease-out both; }
+  .tc-reveal, .tc-rung { transform: none; }
+  .tc-rung { opacity: 1; }
+  .tc-rung .tc-code { clip-path: none; }
+  .tc-mark-animated .tc-mark-on { animation-name: tc-fade; }
+  .tc-window { transform: none; }
+  .tc-float, .tc-caret { animation: none; }
+  .tc-seq { animation-name: tc-fade; }
+}
+@keyframes tc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes tc-fade-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* LeetCode problem statements (sanitized HTML) */
+.lc-content { font-family: var(--font-geist-sans), system-ui, sans-serif; font-size: 14px; line-height: 1.65; color: var(--foreground); overflow-wrap: anywhere; }
+.lc-content > * + * { margin-top: 0.75rem; }
+.lc-content p:has(> strong.example) { margin-top: 1.25rem; }
+.lc-content strong, .lc-content b { font-weight: 600; }
+.lc-content code { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 0.86em; padding: 0.1em 0.35em; border-radius: 5px; background: var(--muted); border: 1px solid var(--border); }
+.lc-content pre { font-family: var(--font-geist-mono), ui-monospace, monospace; font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; padding: 0.75rem 1rem; border-radius: 10px; background: var(--muted); border: 1px solid var(--border); }
+.lc-content pre code { padding: 0; border: 0; background: none; }
+.lc-content ul { list-style: disc; padding-left: 1.25rem; }
+.lc-content ol { list-style: decimal; padding-left: 1.25rem; }
+.lc-content li + li { margin-top: 0.25rem; }
+.lc-content img { max-width: 100%; height: auto; border-radius: 8px; background: #fff; }
+.lc-content sup { font-size: 0.7em; }

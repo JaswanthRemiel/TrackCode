@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { LogoMark } from './brand/Logo';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from './auth/AuthProvider';
 import { signOut } from 'firebase/auth';
@@ -19,12 +20,14 @@ import {
   Moon,
   BookOpen,
   Settings,
+  Sparkles,
 } from 'lucide-react';
 
 const AUTH_NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/companies', label: 'Companies', icon: Building2 },
   { href: '/problems', label: 'Problems', icon: BookOpen },
+  { href: '/remiel', label: 'Remiel AI', icon: Sparkles },
 ];
 
 const GUEST_NAV_ITEMS = [
@@ -62,8 +65,8 @@ export function Dock() {
         <div className="flex md:flex-col items-center gap-1.5 md:gap-4 w-auto md:w-full">
           {/* Logo */}
           <div className="relative group">
-            <Link href="/" className="w-10 h-10 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center font-bold text-zinc-900 dark:text-zinc-50 text-xs hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:scale-105 transition-all">
-              TC
+            <Link href="/" className="w-10 h-10 rounded-xl bg-[var(--mark-tile)] border border-[var(--mark-tile-border)] flex items-center justify-center hover:scale-105 transition-transform" aria-label="TrackCode home">
+              <LogoMark size={22} />
             </Link>
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:left-14 md:translate-x-0 ml-0 md:ml-2 px-2.5 py-1.5 rounded-lg bg-zinc-950 dark:bg-zinc-900 text-zinc-50 dark:text-zinc-200 text-[10px] font-bold uppercase tracking-wider opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl border border-zinc-800 dark:border-zinc-700 z-50">
               Home
