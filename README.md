@@ -14,6 +14,7 @@ https://github.com/user-attachments/assets/83d166d7-12e1-4bd9-ad4b-e2a8719fdb58
 - **Streak system** - daily streak counter with current and longest streak tracking to keep you consistent
 - **Contribution graph** - a full-year activity heatmap that visualises your daily solve count
 - **LeetCode integration** - connect your LeetCode username to display live stats (ranking, reputation, difficulty breakdown)
+- **Remiel AI coach** - AI study planner and per-problem doubt solver; bring your own OpenAI, Anthropic, Gemini or OpenAI-compatible key
 - **Dark mode** - system-aware theme toggle with smooth transitions
 - **Responsive layout** - works on desktop and mobile with an adaptive dock navigation
 
@@ -74,6 +75,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 npm run build
 npm start
 ```
+
+## Remiel (AI coach)
+
+Remiel lives at `/remiel` (planner + general chat) and beside every problem at `/problems/[id]` (problem-scoped chat).
+
+- **Bring your own key**: users choose OpenAI, Anthropic (Claude), Google Gemini or any OpenAI-compatible API (OpenRouter, Groq, DeepSeek…) in Remiel settings (or the profile page), then type any model id their key can use or click "Load my models" to fetch the live list from the provider. Nothing is hard-coded, so new models work the day they ship. The key is stored only in the browser's `localStorage` and is forwarded per request by `app/api/remiel/*`; it is never persisted server-side.
+- **Scoped context**: the server resolves problem details from `public/problems.json` by id, so the client can't inject fake problem data. The system prompt (`lib/ai/prompts.ts`) restricts Remiel to DSA / interview prep / TrackCode problems and gives hints before full code.
+- **Planner**: the server pre-selects a pool of real, unsolved problems for the chosen company/topics; the model only orders them into days, and its output is validated against that pool.
+- **Auth**: API routes require a Firebase ID token (verified with `firebase-admin` using `NEXT_PUBLIC_FIREBASE_PROJECT_ID`; no service account needed).
+
+### Firestore rules
+
+The complete rules, including the `remielChats` and `remielPlans` collections, are in [`firestore.rules`](firestore.rules). Paste them into Firebase console > Firestore Database > Rules and publish, or deploy with `firebase deploy --only firestore:rules`. Each user can only read and write their own chats and plans.
 
 ## Project Structure
 

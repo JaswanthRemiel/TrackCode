@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/components/auth/AuthProvider';
+import { RemielSettingsPanel } from '@/components/remiel/SettingsDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -139,6 +140,13 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Remiel AI key */}
+      <Card id="remiel-key" className="scroll-mt-8 border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
+        <CardContent className="p-6 md:p-8">
+          <RemielSettingsPanel />
         </CardContent>
       </Card>
 
