@@ -44,7 +44,7 @@ export default function RemielPage() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-[11px] font-medium text-accent">
             <Sparkles className="w-3 h-3" /> AI coach
           </div>
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Remiel</h1>
@@ -102,7 +102,7 @@ export default function RemielPage() {
                   )}
                 >
                   <p className="text-xs font-semibold truncate">{p.title}</p>
-                  <p className="text-[10px] text-zinc-500 mt-0.5">{p.company} · {done}/{ids.length} done</p>
+                  <p className="text-[11px] text-zinc-500 mt-0.5">{p.company} · {done}/{ids.length} done</p>
                 </button>
               );
             })}

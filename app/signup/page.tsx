@@ -69,7 +69,7 @@ export default function SignupPage() {
                 </div>
               )}
               <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Email</Label>
+                <Label htmlFor="email" className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-3 h-4 w-4 text-zinc-400 dark:text-zinc-500 pointer-events-none" />
                   <Input
@@ -84,7 +84,7 @@ export default function SignupPage() {
                 </div>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="password" className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Password</Label>
+                <Label htmlFor="password" className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-zinc-400 dark:text-zinc-500 pointer-events-none" />
                   <Input

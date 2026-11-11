@@ -107,7 +107,7 @@ export default function CompaniesPage() {
 
                   {/* Middle Row: Progress info */}
                   <div className="space-y-2 mt-4">
-                    <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                    <div className="flex justify-between items-center text-[11px] font-medium text-zinc-400 dark:text-zinc-500">
                       <span>Progress</span>
                       <span className="font-mono text-zinc-700 dark:text-zinc-300">{company.solved} / {company.total}</span>
                     </div>
@@ -122,15 +122,15 @@ export default function CompaniesPage() {
                   {/* Bottom Row: Status Badge */}
                   <div className="mt-5 flex justify-between items-center">
                     {isCompleted ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-255/20 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-255/20 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400">
                         Completed
                       </span>
                     ) : isInProgress ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-50 dark:bg-amber-950/30 border border-amber-255/20 dark:border-emerald-900/30 text-amber-700 dark:text-amber-400">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-amber-50 dark:bg-amber-950/30 border border-amber-255/20 dark:border-emerald-900/30 text-amber-700 dark:text-amber-400">
                         In progress
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400">
                         Not started
                       </span>
                     )}

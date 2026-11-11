@@ -1,5 +1,7 @@
 'use client';
 
+import { formatDifficulty } from '@/lib/utils';
+
 import { useAuth } from '@/components/auth/AuthProvider';
 import { useData } from '@/components/data/DataProvider';
 import { Badge } from '@/components/ui/badge';
@@ -204,7 +206,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
     <div className="space-y-8 px-4 md:px-0 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
-          <Breadcrumb className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+          <Breadcrumb className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href="/companies" className="hover:text-zinc-900 dark:hover:text-zinc-100">Companies</BreadcrumbLink>
@@ -221,7 +223,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
         <div className="bg-white dark:bg-zinc-950 p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 min-w-full md:min-w-[240px] shadow-none transition-colors duration-300">
            <div className="space-y-3">
               <div className="flex justify-between items-end">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Overall Mastery</p>
+                <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Overall Mastery</p>
                 <p className="font-bold text-lg text-zinc-900 dark:text-zinc-50">{solvedCount} <span className="text-zinc-400 dark:text-zinc-600 text-xs font-normal">/ {totalCount}</span></p>
               </div>
               <div className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-900 rounded-full overflow-hidden">
@@ -240,7 +242,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
         <DifficultyCard label="Hard" solved={difficultyStats.HARD.solved} total={difficultyStats.HARD.total} color="bg-rose-500" />
       </div>
 
-      <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none overflow-hidden rounded-xl bg-white dark:bg-zinc-950 transition-colors duration-300">
+      <Card className="py-0 gap-0 border border-zinc-200 dark:border-zinc-800 shadow-none overflow-hidden rounded-xl bg-white dark:bg-zinc-950 transition-colors duration-300">
         <CardContent className="p-0">
           <div className="p-4 md:p-6 border-b border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row gap-4 justify-between sm:items-center">
             <div className="relative w-full sm:max-w-sm">
@@ -286,10 +288,10 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
             <Table className="min-w-[600px] md:min-w-full text-zinc-900 dark:text-zinc-50">
               <TableHeader>
                 <TableRow className="border-b border-zinc-200 dark:border-zinc-800 hover:bg-transparent">
-                  <TableHead className="w-[100px] md:w-[120px] pl-4 md:pl-6 text-zinc-400 dark:text-zinc-500 uppercase text-[9px] md:text-[10px] tracking-wider font-bold">Status</TableHead>
-                  <TableHead className="text-zinc-400 dark:text-zinc-500 uppercase text-[9px] md:text-[10px] tracking-wider font-bold">Title</TableHead>
-                  <TableHead className="text-zinc-400 dark:text-zinc-500 uppercase text-[9px] md:text-[10px] tracking-wider font-bold">Difficulty</TableHead>
-                  <TableHead className="hidden md:table-cell text-zinc-400 dark:text-zinc-500 uppercase text-[9px] md:text-[10px] tracking-wider font-bold">Topics</TableHead>
+                  <TableHead className="w-[100px] md:w-[120px] pl-4 md:pl-6 text-zinc-400 dark:text-zinc-500 text-[11px] md:text-[11px] font-medium">Status</TableHead>
+                  <TableHead className="text-zinc-400 dark:text-zinc-500 text-[11px] md:text-[11px] font-medium">Title</TableHead>
+                  <TableHead className="text-zinc-400 dark:text-zinc-500 text-[11px] md:text-[11px] font-medium">Difficulty</TableHead>
+                  <TableHead className="hidden md:table-cell text-zinc-400 dark:text-zinc-500 text-[11px] md:text-[11px] font-medium">Topics</TableHead>
                   <TableHead className="w-[50px] pr-4 md:pr-6"></TableHead>
                 </TableRow>
               </TableHeader>
@@ -313,7 +315,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
                               className={buttonVariants({
                                 variant: "ghost",
                                 size: "sm",
-                                className: `w-[90px] h-7 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all border ${
+                                className: `w-[90px] h-7 text-[11px] font-bold rounded-md transition-all border ${
                                   stat === 'done'
                                     ? 'bg-emerald-100/80 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 border-emerald-200/80 dark:border-emerald-900/30 hover:bg-emerald-200/60 dark:hover:bg-emerald-950/50'
                                     : stat === 'revision'
@@ -346,7 +348,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
                                   e.stopPropagation();
                                   openNoteDialog(problem.id, problem.title);
                                 }}
-                                className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-850 text-zinc-500 dark:text-zinc-400 rounded border border-zinc-200 dark:border-zinc-800 ml-1 text-[9px] font-bold uppercase tracking-wider cursor-pointer transition-colors"
+                                className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-850 text-zinc-500 dark:text-zinc-400 rounded border border-zinc-200 dark:border-zinc-800 ml-1 text-[11px] font-medium cursor-pointer transition-colors"
                                 title="Click to view/edit note"
                               >
                                 <StickyNote className="w-2.5 h-2.5" />
@@ -356,19 +358,19 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border transition-colors ${problem.difficulty === 'EASY'
-                            ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30'
+                          <div className={`inline-flex px-2 py-0.5 rounded text-[11px] font-bold border transition-colors ${problem.difficulty === 'EASY'
+                            ? 'bg-emerald-50 dark:bg-white/[0.05] text-emerald-700 dark:text-[#7EE2A8] border-emerald-100 dark:border-transparent'
                             : problem.difficulty === 'MEDIUM'
-                              ? 'bg-amber-50 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 border-amber-100 dark:border-amber-900/30'
-                              : 'bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-400 border-rose-100 dark:border-rose-900/30'
+                              ? 'bg-amber-50 dark:bg-white/[0.05] text-amber-700 dark:text-[#E3B341] border-amber-100 dark:border-transparent'
+                              : 'bg-rose-50 dark:bg-white/[0.05] text-rose-700 dark:text-[#F47067] border-rose-100 dark:border-transparent'
                             }`}>
-                            {problem.difficulty}
+                            {formatDifficulty(problem.difficulty)}
                           </div>
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                           <div className="flex flex-wrap gap-1">
                             {problem.tags.slice(0, 3).map(tag => (
-                              <span key={tag} className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5 rounded bg-zinc-50/50 dark:bg-zinc-900/20">
+                              <span key={tag} className="text-[11px] font-semibold text-zinc-400 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5 rounded bg-zinc-50/50 dark:bg-zinc-900/20">
                                 {tag}
                               </span>
                             ))}
@@ -429,7 +431,7 @@ export default function CompanyPage(props: { params: Promise<{ company: string }
           
           <div className="p-6 space-y-4">
             <div className="space-y-2">
-               <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Insights & Tips</label>
+               <label className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Insights & Tips</label>
                <Textarea 
                 placeholder="What did you learn? Are there any tricky edge cases for this problem?"
                 value={noteContent}
@@ -466,7 +468,7 @@ function DifficultyCard({ label, solved, total, color }: { label: string, solved
     <Card className="p-5 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none rounded-xl transition-colors duration-300">
       <div className="space-y-3">
         <div className="flex justify-between items-end">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">{label}</p>
+          <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">{label}</p>
           <p className="font-bold text-lg text-zinc-900 dark:text-zinc-50">{solved} <span className="text-zinc-400 dark:text-zinc-650 text-xs font-normal">/ {total}</span></p>
         </div>
         <div className="h-1 w-full bg-zinc-100 dark:bg-zinc-900 rounded-full overflow-hidden">

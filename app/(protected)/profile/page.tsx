@@ -65,7 +65,7 @@ export default function ProfilePage() {
     <div className="max-w-3xl mx-auto space-y-8 py-6 md:py-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Profile Hero */}
       <div className="flex flex-col items-center text-center space-y-4">
-        <div className="w-16 h-16 rounded-xl bg-zinc-950 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-50 dark:text-zinc-100 flex items-center justify-center text-2xl font-bold uppercase shadow-none">
+        <div className="w-16 h-16 rounded-xl bg-zinc-950 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-50 dark:text-zinc-100 flex items-center justify-center text-2xl font-bold shadow-none">
           {userData.email ? userData.email[0] : 'U'}
         </div>
         <div className="space-y-1">
@@ -82,7 +82,7 @@ export default function ProfilePage() {
               <CheckCircle className="w-4 h-4" />
             </div>
             <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.totalSolved}</p>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Solved</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Solved</p>
           </div>
         </Card>
         <Card className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none text-center rounded-xl transition-colors duration-300">
@@ -91,7 +91,7 @@ export default function ProfilePage() {
               <Flame className="w-4 h-4" />
             </div>
             <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.currentStreak}</p>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Streak</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Streak</p>
           </div>
         </Card>
         <Card className="p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-none text-center rounded-xl transition-colors duration-300">
@@ -100,13 +100,13 @@ export default function ProfilePage() {
               <Calendar className="w-4 h-4" />
             </div>
             <p className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">{userData.longestStreak}</p>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Best</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Best</p>
           </div>
         </Card>
       </div>
 
       {/* Account Details */}
-      <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
+      <Card className="py-0 gap-0 border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
         <CardContent className="p-0">
           <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
             <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Account Details</h2>
@@ -117,7 +117,7 @@ export default function ProfilePage() {
                 <Mail className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">Email</p>
+                <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 mb-0.5">Email</p>
                 <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{userData.email}</p>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function ProfilePage() {
                 <Hash className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">User ID</p>
+                <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 mb-0.5">User ID</p>
                 <p className="text-sm font-medium font-mono text-zinc-500 dark:text-zinc-400">{userData.uid.slice(0, 12)}...</p>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function ProfilePage() {
                 <Calendar className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-0.5">Joined</p>
+                <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 mb-0.5">Joined</p>
                 <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{new Date(userData.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
               </div>
             </div>
@@ -144,14 +144,14 @@ export default function ProfilePage() {
       </Card>
 
       {/* Remiel AI key */}
-      <Card id="remiel-key" className="scroll-mt-8 border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
+      <Card id="remiel-key" className="py-0 gap-0 scroll-mt-8 border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
         <CardContent className="p-6 md:p-8">
           <RemielSettingsPanel />
         </CardContent>
       </Card>
 
       {/* Security Zone */}
-      <Card className="border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
+      <Card className="py-0 gap-0 border border-zinc-200 dark:border-zinc-800 shadow-none bg-white dark:bg-zinc-950 rounded-xl overflow-hidden transition-colors duration-300">
         <CardContent className="p-6 md:p-8 space-y-5">
           <div>
             <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">Security</h2>
@@ -174,7 +174,7 @@ export default function ProfilePage() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="newPassword" className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">New Password</Label>
+              <Label htmlFor="newPassword" className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">New Password</Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3.5 h-4 w-4 text-zinc-450 dark:text-zinc-500 pointer-events-none" />
                 <Input
@@ -211,7 +211,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* Danger Zone */}
-      <Card className="border border-rose-250/30 dark:border-rose-900/30 bg-rose-50/20 dark:bg-rose-950/10 shadow-none overflow-hidden transition-colors duration-300 rounded-xl">
+      <Card className="py-0 gap-0 border border-rose-250/30 dark:border-rose-900/30 bg-rose-50/20 dark:bg-rose-950/10 shadow-none overflow-hidden transition-colors duration-300 rounded-xl">
         <CardContent className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <h3 className="text-base font-semibold text-rose-900 dark:text-rose-400">Sign Out</h3>

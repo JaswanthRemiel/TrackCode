@@ -96,7 +96,7 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5 sm:col-span-2">
-          <Label htmlFor="plan-company" className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Target company</Label>
+          <Label htmlFor="plan-company" className="text-[11px] font-medium text-zinc-500">Target company</Label>
           <Input
             id="plan-company"
             list="plan-companies"
@@ -111,16 +111,16 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Days · {days}</Label>
+          <Label className="text-[11px] font-medium text-zinc-500">Days · {days}</Label>
           <input type="range" min={3} max={60} value={days} onChange={e => setDays(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
         </div>
         <div className="space-y-1.5">
-          <Label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Problems / day · {perDay}</Label>
+          <Label className="text-[11px] font-medium text-zinc-500">Problems / day · {perDay}</Label>
           <input type="range" min={1} max={8} value={perDay} onChange={e => setPerDay(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
         </div>
 
         <div className="space-y-1.5 sm:col-span-2">
-          <Label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Difficulty curve</Label>
+          <Label className="text-[11px] font-medium text-zinc-500">Difficulty curve</Label>
           <div className="grid grid-cols-3 gap-2">
             {([
               ['easy-first', 'Easy → Hard'],
@@ -143,7 +143,7 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
         </div>
 
         <div className="space-y-1.5 sm:col-span-2">
-          <Label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Focus topics (optional)</Label>
+          <Label className="text-[11px] font-medium text-zinc-500">Focus topics (optional)</Label>
           <div className="flex flex-wrap gap-1.5">
             {shownTags.map(t => {
               const on = topics.includes(t);
@@ -153,7 +153,7 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
                   type="button"
                   onClick={() => setTopics(ts => (on ? ts.filter(x => x !== t) : ts.length < 12 ? [...ts, t] : ts))}
                   className={cn(
-                    'px-2 py-1 rounded-md border text-[10px] font-semibold cursor-pointer transition-colors',
+                    'px-2 py-1 rounded-md border text-[11px] font-semibold cursor-pointer transition-colors',
                     on ? 'border-accent bg-accent text-accent-foreground' : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
                   )}
                 >
@@ -162,7 +162,7 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
               );
             })}
             {tags.length > 18 && (
-              <button type="button" onClick={() => setShowAllTopics(s => !s)} className="px-2 py-1 text-[10px] font-semibold text-accent cursor-pointer">
+              <button type="button" onClick={() => setShowAllTopics(s => !s)} className="px-2 py-1 text-[11px] font-semibold text-accent cursor-pointer">
                 {showAllTopics ? 'Show less' : `+${tags.length - 18} more`}
               </button>
             )}
@@ -170,7 +170,7 @@ export function PlannerForm({ onCreated }: { onCreated: (id: string) => void }) 
         </div>
 
         <div className="space-y-1.5 sm:col-span-2">
-          <Label htmlFor="plan-goal" className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Anything else? (optional)</Label>
+          <Label htmlFor="plan-goal" className="text-[11px] font-medium text-zinc-500">Anything else? (optional)</Label>
           <Input
             id="plan-goal"
             value={goal}
@@ -221,7 +221,7 @@ export function PlanView({ plan }: { plan: RemielPlan }) {
       <div className="p-5 md:p-6 space-y-4 border-b border-zinc-200 dark:border-zinc-800">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1 min-w-0">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-accent">{plan.company} · {plan.days.length} days</p>
+            <p className="text-[11px] font-medium text-accent">{plan.company} · {plan.days.length} days</p>
             <h2 className="text-xl md:text-2xl font-semibold tracking-tight">{plan.title}</h2>
             {plan.summary && <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl">{plan.summary}</p>}
           </div>
@@ -258,7 +258,7 @@ export function PlanView({ plan }: { plan: RemielPlan }) {
               <button onClick={() => toggle(i)} className="w-full flex items-center gap-3 px-5 md:px-6 py-3 text-left cursor-pointer hover:bg-zinc-50/60 dark:hover:bg-zinc-900/40">
                 <div
                   className={cn(
-                    'w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[11px] font-bold border',
+                    'w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[11px] font-medium border',
                     complete ? 'bg-emerald-500 text-white border-transparent' : i === today ? 'border-accent text-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-500',
                   )}
                 >
@@ -267,9 +267,9 @@ export function PlanView({ plan }: { plan: RemielPlan }) {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold truncate">
                     {d.theme}
-                    {i === today && <span className="ml-2 text-[9px] font-bold uppercase tracking-wider text-accent">Today</span>}
+                    {i === today && <span className="ml-2 text-[11px] font-medium text-accent">Today</span>}
                   </p>
-                  <p className="text-[10px] text-zinc-500 flex items-center gap-1">
+                  <p className="text-[11px] text-zinc-500 flex items-center gap-1">
                     <CalendarDays className="w-3 h-3" />
                     {date.toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · {dayDone}/{d.problemIds.length}
                   </p>
