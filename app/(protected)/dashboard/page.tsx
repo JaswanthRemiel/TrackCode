@@ -85,7 +85,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50">
               <CheckCircle className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Total Solved</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Total Solved</p>
             <div className="flex items-baseline gap-2">
                <span className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{totalSolved}</span>
                <span className="text-zinc-500 dark:text-zinc-400 text-xs">problems</span>
@@ -98,7 +98,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50">
               <Building2 className="w-4 h-4" />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Companies</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Companies</p>
             <div className="flex items-baseline gap-2">
                <span className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{companiesTracked}</span>
                <span className="text-zinc-500 dark:text-zinc-400 text-xs">tracked</span>
@@ -111,7 +111,7 @@ export default function DashboardPage() {
             <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-900 dark:text-zinc-50">
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">Today</p>
+            <p className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500">Today</p>
             <div className="flex items-baseline gap-2">
                <span className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
                 {activity.find(a => a.date === new Date().toLocaleDateString('en-CA'))?.problemsSolved ?? 0}

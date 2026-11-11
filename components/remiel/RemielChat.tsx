@@ -7,10 +7,11 @@ import { streamRemielChat } from '@/lib/ai/client';
 import { ChatMessage, PROVIDERS, RemielChat as RemielChatDoc, RemielChatContext } from '@/lib/ai/types';
 import { deleteChat, newChatId, saveChat, useRemielChats } from '@/hooks/useRemiel';
 import { Markdown } from './Markdown';
+import { LogoMark } from '@/components/brand/Logo';
 import { RemielSettingsDialog } from './SettingsDialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import { ArrowUp, ChevronDown, History, KeyRound, MessageSquarePlus, Settings2, Sparkles, Square, Trash2 } from 'lucide-react';
+import { ArrowUp, ChevronDown, History, KeyRound, MessageSquarePlus, Settings2, Square, Trash2 } from 'lucide-react';
 
 interface Props {
   scope: string;
@@ -158,12 +159,12 @@ export function RemielChat({ scope, problemId = null, getContext, heading = 'Rem
       {/* Header */}
       <div className="flex items-center justify-between gap-2 px-4 py-3 border-b border-zinc-200 dark:border-zinc-800">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="relative w-8 h-8 shrink-0 rounded-lg bg-accent flex items-center justify-center text-accent-foreground">
-            <Sparkles className="w-4 h-4" />
+          <div className="relative w-8 h-8 shrink-0 rounded-lg bg-[var(--mark-tile)] ring-1 ring-[var(--mark-tile-border)] flex items-center justify-center">
+            <LogoMark size={16} />
           </div>
           <div className="min-w-0">
             <p className="text-sm font-semibold tracking-tight leading-none">{heading}</p>
-            <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate mt-1">
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate mt-1">
               {subheading ?? (configured ? `${PROVIDERS[settings.provider].label.split(' (')[0]} · ${settings.model}` : 'Add your API key and model to start')}
             </p>
           </div>
@@ -171,7 +172,7 @@ export function RemielChat({ scope, problemId = null, getContext, heading = 'Rem
         <div className="flex items-center gap-1 shrink-0">
           <DropdownMenu>
             <DropdownMenuTrigger
-              className="h-8 px-2 rounded-lg flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer"
+              className="h-8 px-2 rounded-lg flex items-center gap-1 text-[11px] font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900 cursor-pointer"
               aria-label="Chat history"
             >
               <History className="w-3.5 h-3.5" />
@@ -193,7 +194,7 @@ export function RemielChat({ scope, problemId = null, getContext, heading = 'Rem
                   >
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-medium truncate">{c.title}</p>
-                      <p className="text-[10px] text-zinc-500">{c.messages.length} msgs · {timeAgo(c.updatedAt)}</p>
+                      <p className="text-[11px] text-zinc-500">{c.messages.length} msgs · {timeAgo(c.updatedAt)}</p>
                     </div>
                     <span
                       role="button"
@@ -225,8 +226,8 @@ export function RemielChat({ scope, problemId = null, getContext, heading = 'Rem
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-4">
         {messages.length === 0 && !busy ? (
           <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-8">
-            <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center text-accent-foreground">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-2xl bg-[var(--mark-tile)] ring-1 ring-[var(--mark-tile-border)] flex items-center justify-center">
+              <LogoMark size={24} animated />
             </div>
             <div className="space-y-1 max-w-xs">
               <p className="text-sm font-semibold">How can I help?</p>
@@ -325,8 +326,8 @@ function Bubble({ message, pending }: { message: ChatMessage; pending?: boolean 
   }
   return (
     <div className="flex gap-2.5">
-      <div className="w-6 h-6 mt-0.5 shrink-0 rounded-md bg-accent flex items-center justify-center text-accent-foreground">
-        <Sparkles className="w-3 h-3" />
+      <div className="w-6 h-6 mt-0.5 shrink-0 rounded-md bg-[var(--mark-tile)] ring-1 ring-[var(--mark-tile-border)] flex items-center justify-center">
+        <LogoMark size={12} />
       </div>
       <div className="min-w-0 flex-1 text-zinc-800 dark:text-zinc-200">
         {pending ? (

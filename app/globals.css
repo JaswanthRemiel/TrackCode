@@ -4,12 +4,47 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Brand palette. The app's components use Tailwind's zinc and emerald scales,
+ * so remapping them restyles every page at once. Zinc follows the theme
+ * (--zinc-* are set per theme below) so dark mode matches the landing hero.
+ */
+@theme inline {
+  --color-zinc-50: var(--zinc-50);
+  --color-zinc-100: var(--zinc-100);
+  --color-zinc-200: var(--zinc-200);
+  --color-zinc-300: var(--zinc-300);
+  --color-zinc-400: var(--zinc-400);
+  --color-zinc-500: var(--zinc-500);
+  --color-zinc-600: var(--zinc-600);
+  --color-zinc-700: var(--zinc-700);
+  --color-zinc-800: var(--zinc-800);
+  --color-zinc-850: var(--zinc-850);
+  --color-zinc-900: var(--zinc-900);
+  --color-zinc-950: var(--zinc-950);
+}
+
+@theme {
+  --color-emerald-50: #dafbe1;
+  --color-emerald-100: #aceebb;
+  --color-emerald-200: #6fdd8b;
+  --color-emerald-300: #4ac26b;
+  --color-emerald-400: #3fb950;
+  --color-emerald-500: #2da44e;
+  --color-emerald-600: #1a7f37;
+  --color-emerald-700: #116329;
+  --color-emerald-800: #044f1e;
+  --color-emerald-900: #003d16;
+  --color-emerald-950: #002d11;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-serif: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-heading: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
   --font-brand: var(--font-space-grotesk), var(--font-geist-sans), system-ui, sans-serif;
 
   --color-primary: var(--primary);
@@ -26,18 +61,30 @@
 }
 
 :root {
-  --background: #F9F9F9;
-  --foreground: #111111;
-  --card: #FFFFFF;
-  --card-foreground: #111111;
-  --popover: #FFFFFF;
-  --popover-foreground: #111111;
-  --primary: #111111;
-  --primary-foreground: #FFFFFF;
-  --secondary: #EEEEEE;
-  --secondary-foreground: #111111;
-  --muted: #F3F3F3;
-  --muted-foreground: #666666;
+  --zinc-50: #f6f8fa;
+  --zinc-100: #eff2f5;
+  --zinc-200: #d1d9e0;
+  --zinc-300: #b7bfc7;
+  --zinc-400: #8b949e;
+  --zinc-500: #6e7781;
+  --zinc-600: #59636e;
+  --zinc-700: #3d444d;
+  --zinc-800: #262c34;
+  --zinc-850: #1c2129;
+  --zinc-900: #161b22;
+  --zinc-950: #0d1117;
+  --background: #f6f8fa;
+  --foreground: #0d1117;
+  --card: #ffffff;
+  --card-foreground: #0d1117;
+  --popover: #ffffff;
+  --popover-foreground: #0d1117;
+  --primary: #0d1117;
+  --primary-foreground: #ffffff;
+  --secondary: #eff2f5;
+  --secondary-foreground: #0d1117;
+  --muted: #eff2f5;
+  --muted-foreground: #59636e;
   --accent: #15803D;
   --accent-foreground: #FFFFFF;
   --brand: #15803D;
@@ -50,25 +97,38 @@
   --mark-tile: #FFFFFF;
   --mark-tile-border: #D0D7DE;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #E5E5E5;
-  --input: #E5E5E5;
-  --ring: #111111;
+  --border: #d1d9e0;
+  --input: #d1d9e0;
+  --ring: #0d1117;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #e5e5e5;
-  --card: #141414;
-  --card-foreground: #e5e5e5;
-  --popover: #141414;
-  --popover-foreground: #e5e5e5;
-  --primary: #e5e5e5;
-  --primary-foreground: #0a0a0a;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #e5e5e5;
-  --muted: #1a1a1a;
-  --muted-foreground: #888888;
+  /* Same palette as the landing hero: #0d1117 page, #161b22 cards, faint borders */
+  --zinc-50: #f0f3f6;
+  --zinc-100: #e6eaef;
+  --zinc-200: #d1d7e0;
+  --zinc-300: #b7bdc8;
+  --zinc-400: #9ea7b3;
+  --zinc-500: #7d8590;
+  --zinc-600: #5d6570;
+  --zinc-700: #3d444d;
+  --zinc-800: #2a3038;
+  --zinc-850: #232830;
+  --zinc-900: #1c2128;
+  --zinc-950: #161b22;
+  --background: #0d1117;
+  --foreground: #f0f3f6;
+  --card: #161b22;
+  --card-foreground: #f0f3f6;
+  --popover: #1c2128;
+  --popover-foreground: #f0f3f6;
+  --primary: #f0f3f6;
+  --primary-foreground: #0d1117;
+  --secondary: #1c2128;
+  --secondary-foreground: #f0f3f6;
+  --muted: #1c2128;
+  --muted-foreground: #9ea7b3;
   --accent: #4ADE80;
   --accent-foreground: #0D1117;
   --brand: #4ADE80;
@@ -81,9 +141,9 @@
   --mark-tile: #0D1117;
   --mark-tile-border: #21262D;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #262626;
-  --input: #262626;
-  --ring: #e5e5e5;
+  --border: #2a3038;
+  --input: #2a3038;
+  --ring: #f0f3f6;
 }
 
 @layer base {
@@ -93,21 +153,14 @@
 
   body {
     @apply bg-background text-foreground font-sans min-h-screen relative;
-    background-image: radial-gradient(var(--dot-color, #e5e7eb) 0.8px, transparent 0.8px);
-    background-size: 20px 20px;
-    background-attachment: fixed;
-  }
-
-  .dark body,
-  body:is(.dark *) {
-    --dot-color: #1f1f1f;
+    letter-spacing: -0.003em;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-sans tracking-tight;
+    @apply font-heading tracking-tight;
   }
 }
 

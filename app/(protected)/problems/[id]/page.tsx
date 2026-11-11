@@ -14,18 +14,18 @@ import { updateProblemStatus } from '@/lib/progress';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { ProgressStatus } from '@/types';
-import { cn } from '@/lib/utils';
+import { cn, formatDifficulty } from '@/lib/utils';
 import { ArrowLeft, Building2, CheckCircle2, ExternalLink, RotateCcw, Circle, StickyNote } from 'lucide-react';
 
 const DIFF_STYLES = {
-  EASY: 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 border-emerald-100 dark:border-emerald-900/30',
-  MEDIUM: 'bg-amber-50 dark:bg-amber-950/20 text-amber-700 dark:text-amber-400 border-amber-100 dark:border-amber-900/30',
-  HARD: 'bg-rose-50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-400 border-rose-100 dark:border-rose-900/30',
+  EASY: 'bg-emerald-50 dark:bg-white/[0.05] text-emerald-700 dark:text-[#7EE2A8] border-emerald-100 dark:border-transparent',
+  MEDIUM: 'bg-amber-50 dark:bg-white/[0.05] text-amber-700 dark:text-[#E3B341] border-amber-100 dark:border-transparent',
+  HARD: 'bg-rose-50 dark:bg-white/[0.05] text-rose-700 dark:text-[#F47067] border-rose-100 dark:border-transparent',
 } as const;
 
 const STATUS_OPTIONS: { value: ProgressStatus; label: string; icon: typeof Circle; active: string }[] = [
   { value: 'todo', label: 'Todo', icon: Circle, active: 'bg-zinc-900 text-zinc-50 dark:bg-zinc-50 dark:text-zinc-900 border-transparent' },
-  { value: 'done', label: 'Done', icon: CheckCircle2, active: 'bg-emerald-500 text-white border-transparent' },
+  { value: 'done', label: 'Done', icon: CheckCircle2, active: 'bg-accent text-accent-foreground border-transparent' },
   { value: 'revision', label: 'Revise', icon: RotateCcw, active: 'bg-amber-500 text-white border-transparent' },
 ];
 
@@ -119,11 +119,11 @@ export default function ProblemDetailPage() {
 
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className={cn('inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border', DIFF_STYLES[problem.difficulty])}>
-              {problem.difficulty}
+            <span className={cn('inline-flex px-2 py-0.5 rounded text-[11px] font-medium border', DIFF_STYLES[problem.difficulty])}>
+              {formatDifficulty(problem.difficulty)}
             </span>
             {problem.tags.map(t => (
-              <span key={t} className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5 rounded bg-zinc-50/50 dark:bg-zinc-900/20">
+              <span key={t} className="text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5 rounded bg-zinc-50/50 dark:bg-zinc-900/20">
                 {t}
               </span>
             ))}
@@ -138,7 +138,7 @@ export default function ProblemDetailPage() {
                   disabled={updating}
                   onClick={() => setStatus(o.value)}
                   className={cn(
-                    'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[11px] font-bold uppercase tracking-wider border transition-colors cursor-pointer disabled:opacity-60',
+                    'inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-[11px] font-medium border transition-colors cursor-pointer disabled:opacity-60',
                     status === o.value ? o.active : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
                   )}
                 >
@@ -161,7 +161,7 @@ export default function ProblemDetailPage() {
 
         {/* Companies */}
         <section className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5 space-y-3">
-          <h2 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+          <h2 className="flex items-center gap-2 text-[11px] font-medium text-zinc-500">
             <Building2 className="w-3.5 h-3.5" /> Asked at {companies.length} companies
           </h2>
           <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto">
@@ -169,7 +169,7 @@ export default function ProblemDetailPage() {
               <Link
                 key={c}
                 href={`/companies/${encodeURIComponent(c)}`}
-                className="text-[10px] font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 px-2 py-1 rounded"
+                className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 px-2 py-1 rounded"
               >
                 {c}
               </Link>
@@ -180,10 +180,10 @@ export default function ProblemDetailPage() {
         {/* Note */}
         <section className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-5 space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+            <h2 className="flex items-center gap-2 text-[11px] font-medium text-zinc-500">
               <StickyNote className="w-3.5 h-3.5" /> Personal note
             </h2>
-            <span className="text-[10px] text-zinc-400">Remiel can read this for context</span>
+            <span className="text-[11px] text-zinc-400">Remiel can read this for context</span>
           </div>
           <Textarea
             value={note}
@@ -207,7 +207,7 @@ export default function ProblemDetailPage() {
         {/* Related */}
         {related.length > 0 && (
           <section className="space-y-3">
-            <h2 className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Similar problems</h2>
+            <h2 className="text-[11px] font-medium text-zinc-500">Similar problems</h2>
             <div className="grid sm:grid-cols-2 gap-2">
               {related.map(r => (
                 <Link
@@ -216,7 +216,7 @@ export default function ProblemDetailPage() {
                   className="flex items-center justify-between gap-3 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2.5 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
                 >
                   <span className="text-xs font-medium truncate">{r.title}</span>
-                  <span className={cn('shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase border', DIFF_STYLES[r.difficulty])}>{r.difficulty}</span>
+                  <span className={cn('shrink-0 px-1.5 py-0.5 rounded text-[11px] font-medium border', DIFF_STYLES[r.difficulty])}>{formatDifficulty(r.difficulty)}</span>
                 </Link>
               ))}
             </div>

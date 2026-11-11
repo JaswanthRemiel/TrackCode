@@ -99,7 +99,7 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
   const fields = (
     <div className="space-y-5 py-2">
       <div className="space-y-2">
-        <Label className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Provider</Label>
+        <Label className="text-[11px] font-medium text-zinc-500">Provider</Label>
         <div className="grid grid-cols-2 gap-2">
           {(Object.keys(PROVIDERS) as ProviderId[]).map(id => (
             <button
@@ -125,7 +125,7 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
 
       {draft.provider === 'compatible' && (
         <div className="space-y-2">
-          <Label htmlFor={`${uid}-base`} className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Base URL</Label>
+          <Label htmlFor={`${uid}-base`} className="text-[11px] font-medium text-zinc-500">Base URL</Label>
           <Input
             id={`${uid}-base`}
             value={draft.baseUrl ?? ''}
@@ -138,8 +138,8 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
 
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <Label htmlFor={`${uid}-key`} className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">API key</Label>
-          <a href={info.keyUrl} target="_blank" rel="noreferrer" className="text-[10px] font-semibold text-accent hover:underline">Get a key ↗</a>
+          <Label htmlFor={`${uid}-key`} className="text-[11px] font-medium text-zinc-500">API key</Label>
+          <a href={info.keyUrl} target="_blank" rel="noreferrer" className="text-[11px] font-semibold text-accent hover:underline">Get a key ↗</a>
         </div>
         <div className="relative">
           <Input
@@ -168,8 +168,8 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
 
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-2">
-          <Label htmlFor={`${uid}-model`} className="text-[10px] uppercase tracking-wider font-bold text-zinc-500">Model</Label>
-          <a href={info.modelsUrl} target="_blank" rel="noreferrer" className="text-[10px] font-semibold text-accent hover:underline">See model ids ↗</a>
+          <Label htmlFor={`${uid}-model`} className="text-[11px] font-medium text-zinc-500">Model</Label>
+          <a href={info.modelsUrl} target="_blank" rel="noreferrer" className="text-[11px] font-semibold text-accent hover:underline">See model ids ↗</a>
         </div>
         <div className="flex gap-2">
           <Input
@@ -199,7 +199,7 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
         {modelsError && <p className="text-[11px] text-rose-600 dark:text-rose-400">{modelsError}</p>}
         {loaded && loaded.length > 0 && (
           <div className="space-y-1.5">
-            <p className="text-[10px] text-zinc-400">
+            <p className="text-[11px] text-zinc-400">
               {loaded.length} models available{draft.model ? `, ${matches.length === 24 ? '24+' : matches.length} matching` : ''}. Type to filter.
             </p>
             <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto">
@@ -209,7 +209,7 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
                   type="button"
                   onClick={() => update({ model: m })}
                   className={cn(
-                    'rounded border px-1.5 py-0.5 text-[10px] font-semibold cursor-pointer',
+                    'rounded border px-1.5 py-0.5 text-[11px] font-semibold cursor-pointer',
                     draft.model === m ? 'border-accent text-accent' : 'border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100',
                   )}
                 >
@@ -264,7 +264,7 @@ function SettingsForm({ variant, onDone }: { variant: 'dialog' | 'inline'; onDon
         </div>
         <span
           className={cn(
-            'shrink-0 rounded-md border px-2 py-1 text-[10px] font-bold uppercase tracking-wider',
+            'shrink-0 rounded-md border px-2 py-1 text-[11px] font-medium ',
             configured ? 'border-emerald-200 dark:border-emerald-900/40 text-emerald-700 dark:text-emerald-400' : 'border-zinc-200 dark:border-zinc-800 text-zinc-500',
           )}
         >

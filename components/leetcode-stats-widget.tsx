@@ -111,7 +111,7 @@ export function LeetCodeStatsWidget() {
             <div className="lg:col-span-3 space-y-4">
               <div>
                 <div className="flex items-center gap-1.5 mb-1.5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">LeetCode Profile</span>
+                  <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500">LeetCode Profile</span>
                   {username && (
                     <a
                       href={`https://leetcode.com/${username}`}
@@ -131,7 +131,7 @@ export function LeetCodeStatsWidget() {
 
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-900 px-3 py-2 rounded-lg">
-                  <div className="flex items-center gap-1 text-zinc-400 dark:text-zinc-500 font-semibold mb-1 uppercase tracking-wide text-[9px]">
+                  <div className="flex items-center gap-1 text-zinc-400 dark:text-zinc-500 font-semibold mb-1 text-[11px]">
                     <Trophy className="w-3 h-3 text-amber-500 shrink-0" />
                     <span>Rank</span>
                   </div>
@@ -140,7 +140,7 @@ export function LeetCodeStatsWidget() {
                   </span>
                 </div>
                 <div className="bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-900 px-3 py-2 rounded-lg">
-                  <div className="flex items-center gap-1 text-zinc-400 dark:text-zinc-500 font-semibold mb-1 uppercase tracking-wide text-[9px]">
+                  <div className="flex items-center gap-1 text-zinc-400 dark:text-zinc-500 font-semibold mb-1 text-[11px]">
                     <Medal className="w-3 h-3 text-emerald-500 shrink-0" />
                     <span>Reputation</span>
                   </div>
@@ -180,13 +180,13 @@ export function LeetCodeStatsWidget() {
                   <span className="text-xl font-extrabold text-zinc-900 dark:text-zinc-50 leading-none">
                     {currentStats.totalSolved}
                   </span>
-                  <span className="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mt-1">
+                  <span className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 mt-1">
                     Solved
                   </span>
                 </div>
               </div>
               <div className="text-center mt-2">
-                <span className="text-[10px] font-semibold text-zinc-400 dark:text-zinc-500">
+                <span className="text-[11px] font-semibold text-zinc-400 dark:text-zinc-500">
                   out of {currentStats.totalQuestions.toLocaleString()} questions
                 </span>
               </div>
@@ -195,7 +195,7 @@ export function LeetCodeStatsWidget() {
             <div className="lg:col-span-6 space-y-3 px-2">
               <div className="space-y-1.5">
                 <div className="flex justify-between items-baseline text-xs font-semibold">
-                  <span className="text-emerald-600 dark:text-emerald-400 uppercase tracking-wider text-[10px]">Easy</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 text-[11px]">Easy</span>
                   <span className="text-zinc-800 dark:text-zinc-200 font-sans">
                     {currentStats.easySolved} <span className="text-zinc-400 dark:text-zinc-500 font-normal">/ {currentStats.easyQuestions}</span>
                   </span>
@@ -210,7 +210,7 @@ export function LeetCodeStatsWidget() {
 
               <div className="space-y-1.5">
                 <div className="flex justify-between items-baseline text-xs font-semibold">
-                  <span className="text-amber-600 dark:text-amber-400 uppercase tracking-wider text-[10px]">Medium</span>
+                  <span className="text-amber-600 dark:text-amber-400 text-[11px]">Medium</span>
                   <span className="text-zinc-800 dark:text-zinc-200 font-sans">
                     {currentStats.mediumSolved} <span className="text-zinc-400 dark:text-zinc-500 font-normal">/ {currentStats.mediumQuestions}</span>
                   </span>
@@ -225,7 +225,7 @@ export function LeetCodeStatsWidget() {
 
               <div className="space-y-1.5">
                 <div className="flex justify-between items-baseline text-xs font-semibold">
-                  <span className="text-rose-600 dark:text-rose-400 uppercase tracking-wider text-[10px]">Hard</span>
+                  <span className="text-rose-600 dark:text-rose-400 text-[11px]">Hard</span>
                   <span className="text-zinc-800 dark:text-zinc-200 font-sans">
                     {currentStats.hardSolved} <span className="text-zinc-400 dark:text-zinc-500 font-normal">/ {currentStats.hardQuestions}</span>
                   </span>
@@ -278,7 +278,7 @@ export function LeetCodeStatsWidget() {
                 size="sm"
                 variant="outline"
                 onClick={() => fetchStats(true)}
-                className="text-[10px] h-7 gap-1 px-3 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900 font-sans"
+                className="text-[11px] h-7 gap-1 px-3 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900 font-sans"
               >
                 <RefreshCw className="w-3 h-3" />
                 Retry
@@ -287,7 +287,7 @@ export function LeetCodeStatsWidget() {
                 size="sm"
                 variant="outline"
                 onClick={() => setModalOpen(true)}
-                className="text-[10px] h-7 gap-1 px-3 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900 font-sans"
+                className="text-[11px] h-7 gap-1 px-3 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900 font-sans"
               >
                 <Settings className="w-3 h-3" />
                 Edit Profile
